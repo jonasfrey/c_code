@@ -1,0 +1,1 @@
+int n_from_my_file = 222;
