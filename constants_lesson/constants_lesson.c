@@ -36,6 +36,13 @@
 //    __DATE__
 //    __TIME__
 
+
+// the #var directive can be used as value and evaluates the passed variable to its variable name 
+
+#define dump_string(var) \
+   printf("\n var_name is : %s", #var); \
+   printf("\n value is    : %s", var); \
+
 int main() {
    /* my first program in C */
    printf("main function called");
@@ -55,6 +62,18 @@ int main() {
 
    printf("\nthe value of the standard macro __DATE__ : %s", __DATE__);
    printf("\nthe value of the standard macro __TIME__ : %s", __TIME__);
+
+
+   char animal[5] = "dogg!";
+
+   dump_string(animal); 
+
+   printf("\n wtf : %s", (animal)); 
+
+
+   char animal_two[] = "firefish";
+
+   dump_string(animal_two); 
 
    return 0;
 }

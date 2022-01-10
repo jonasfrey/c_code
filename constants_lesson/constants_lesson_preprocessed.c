@@ -725,9 +725,9 @@ extern int __overflow (FILE *, int);
 # 873 "/usr/include/stdio.h" 3 4
 
 # 4 "constants_lesson.c" 2
-# 39 "constants_lesson.c"
+# 46 "constants_lesson.c"
 
-# 39 "constants_lesson.c"
+# 46 "constants_lesson.c"
 int main() {
 
    printf("main function called");
@@ -746,7 +746,19 @@ int main() {
 
 
    printf("\nthe value of the standard macro __DATE__ : %s", "Jan 10 2022");
-   printf("\nthe value of the standard macro __TIME__ : %s", "02:58:03");
+   printf("\nthe value of the standard macro __TIME__ : %s", "03:08:42");
+
+
+   char animal[5] = "dogg!";
+
+   printf("\n var_name is : %s", "animal"); printf("\n value is    : %s", animal);;
+
+   printf("\n wtf : %s", (animal));
+
+
+   char animal_two[] = "firefish";
+
+   printf("\n var_name is : %s", "animal_two"); printf("\n value is    : %s", animal_two);;
 
    return 0;
 }
