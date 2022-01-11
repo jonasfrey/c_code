@@ -1,21 +1,7 @@
-
-// c file 
 #include <stdio.h>
-#include <string.h>
-
-struct variable {
-   char  *name;
-   char  *value;
-   char  *type;
-};
-
-
-int main() {
-   /* my first program in C */
-   printf("main function called");
-   
-   return 0;
-}
+#include <stdio.h>
+#include <stddef.h>
+#include <stdint.h>
 
 
 #define typename(x) _Generic((x),        /* Get the name of a type */             \
@@ -31,38 +17,23 @@ long long int: "long long int", unsigned long long int: "unsigned long long int"
        void *: "pointer to void",                int *: "pointer to int",         \
       default: "other")
 
-#define dd(var)\
-   
-   struct variable o_var;\
-   
-   char s_typename = typename(o_var); \
+int main()
+{
+    int n_int = 20;
+    float n_float = 2.2231234;
+    char s_string[] = "asdf"; 
+    printf("\nn_int %i", n_int);
+    printf("\nn_float %f", n_float);
+    printf("\ns_string %s", s_string);
+    
+    char s_n_int[] = typename(n_int);
+    char s_n_float[] = typename(n_float);
+    char s_s_string[] = typename(s_string);
 
-   if(\
-      strstr(s_typename, "int")\
-      ||\
-      strstr(s_typename, "float")\
-      ){\
-         int length = snprintf( NULL, 0, "%d", var );\
-         char* str = malloc( length + 1 );\
-         snprintf( str, length + 1, "%d", var );\
-         char s_str_var_value[] = str; \
-         free(str);\
-   }else{\
-      char s_str_var_value[] = var; \
-   }\
-   
+    printf("\ns_n_int %s", s_n_int);
+    printf("\ns_n_float %s", s_n_float);
+    printf("\ns_s_string %s", s_s_string);
 
-   strcpy(o_var.name, #var);\
-   
-   strcpy(o_var.value, s_str_var_value);\
+    return 0;
+}
 
-   strcpy(o_var.type, typename(var));\
-
-   //printf("\n %s", struct_to_json(o_var));
-   printf("\n %s", o_var.name);\
-   printf("\n %s", o_var.value);\
-   printf("\n %s", o_var.type);
-
-// void dd(){
-//    _dd();
-// }

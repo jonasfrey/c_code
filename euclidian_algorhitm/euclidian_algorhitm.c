@@ -13,8 +13,11 @@ int biggest_together_divisor(int a, int b){
    }
 
    int biggest_together_divisor = n_smaller;
+   int n_algorhitm_cycle_counter = 0;
 
    while(1){
+
+      n_algorhitm_cycle_counter++;
 
       int n_remainder_bigger = n_bigger % biggest_together_divisor;
       int n_remainder_smaller = n_smaller % biggest_together_divisor;
@@ -25,6 +28,8 @@ int biggest_together_divisor(int a, int b){
 
       biggest_together_divisor --; 
    }
+   
+   printf("\n n_algorhitm_cycles needed:%i ",n_algorhitm_cycle_counter );
 
    return biggest_together_divisor;
 }
@@ -38,9 +43,17 @@ int ggt_euclidian(int a, int b){
       n_bigger = b; 
       n_smaller = a; 
    }
+   
    int n_result = 0;
+   
+   int n_algorhitm_cycle_counter = 0;
 
    while(n_bigger != n_smaller){
+      n_algorhitm_cycle_counter++;
+      printf("\n n_algorhitm_cycle:%i ",n_algorhitm_cycle_counter );
+      
+      printf("%i(n_result) = %i(n_bigger) - %i(n_smaller)", n_result, n_bigger, n_smaller);
+
       n_result = n_bigger - n_smaller; 
 
       if(n_result > n_smaller){
@@ -68,6 +81,8 @@ int main() {
    printf("b: ");
    scanf("%d", &n_b);
 
+   printf("\n ------- algorhitm: bruteforce decrement (while not found --) --------");
+
    clock_t start = clock();
 
    int n_biggest_together_divisor = biggest_together_divisor(n_a, n_b); 
@@ -77,8 +92,12 @@ int main() {
    double delta_time = (double) (end-start) / CLOCKS_PER_SEC;
 
    //printf("\n the groesster gemeinsamer teiler von a(%i) und b(%i) ist %i", n_a, n_b , n_biggest_together_divisor);
-   printf("\n bruteforce decrement (%f time)", delta_time); 
+   
+
+   printf("\n time_delta (%f time): ", delta_time); 
    printf("\n ggT(%i,%i) =  %i", n_a, n_b , n_biggest_together_divisor);
+
+   printf("\n ------- algorhitm: euclidean --------");
 
    start = clock();
 
@@ -89,7 +108,7 @@ int main() {
    delta_time = (double) (end-start) / CLOCKS_PER_SEC;
 
    //printf("\n the groesster gemeinsamer teiler von a(%i) und b(%i) ist %i", n_a, n_b , n_biggest_together_divisor);
-   printf("\n euclidean (%f time)", delta_time); 
+   printf("\n time_delta (%f time): ", delta_time); 
    printf("\n ggT(%i,%i) =  %i", n_a, n_b , n_biggest_together_divisor);
 
    return 0;
