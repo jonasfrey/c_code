@@ -2,6 +2,53 @@
 // c file 
 #include <stdio.h>
 
+void print_with_newline_prefix(char s_text[]){
+
+   //note we can 'concatenate' a string by separating with simple spaces 
+   // like this 
+   // "string start" variable_or_const "string end"
+   printf("\n" "");
+}
+void calc_string_length_outside_of_scope_not_possible(char s_text[]){
+   //here we cannot use 
+
+   //    int n_text_length = sizeof(s_text) / sizeof(s_text[0]); 
+   // :( to bad
+}
+
+void a_bad_workaround(char s_text[], int n_text_length){
+   //we have to pass the text length as argument to have access
+   // no one wants to always pass the string length wtf is this workaround 
+}
+
+void calc_string_length_outside_of_scope(char s_text[]){
+
+   // luckly there is the string.h and strlen function
+   #include <string.h>
+   int len = strlen(s_text);
+
+   printf("the stringlength is %i", len);
+
+}
+
+void why_the_fuck_doesnt_this_work(char s_text[]){
+
+   int num = 177;
+   printf("%c", num);
+   printf("%s",s_text);
+   printf("%c", num);
+   // char ch = "▒"; 
+   //char ch = '▒';
+   char chars[] = "▒"; 
+   char ch = chars[0]; 
+   printf("\n The ascii value of the ch variable is : %d", ch);
+   //this wont print "▒" 
+   printf("%c", ch);
+   // but this will print "▒"
+   printf("%s", chars);
+
+}
+
 int main() {
    
    // arrays are defined as follows 
@@ -50,7 +97,12 @@ int main() {
    //    int n_nat_nums [n_array_size] = {1,2,3,4,5,6,7,8,9,0}; 
 
 
+   
+   calc_string_length_outside_of_scope("test");
+   
    return 0;
+
+
 }
 
 

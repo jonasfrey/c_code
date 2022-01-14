@@ -1,6 +1,10 @@
 // c file 
 #include <stdio.h>
 
+
+// array prime_factors(){}
+
+
 // a pretty bad and slow algorhitm to get the grosster gemeinsamer teiler 
 int biggest_together_divisor(int a, int b){
    
