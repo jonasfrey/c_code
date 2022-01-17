@@ -1,0 +1,21 @@
+
+// c file
+#include <stdio.h>
+
+static int r;
+static void *add(void *p)
+{
+   r++;
+}
+int main(int argc, char **argv)
+{
+   pthread_t p1;
+   pthread_t p2;
+   pthread_create(&p1, NULL, &add, NULL);
+   pthread_create(&p2, NULL, &add, NULL);
+   printf("%d ", r);
+   pthread_join(p1, NULL);
+   pthread_join(p2, NULL);
+   printf("%d\n", r);
+   return 0; 
+}

@@ -21,6 +21,7 @@
     "cstdint": "c",
     "stddef.h": "c",
     "typeinfo": "c",
-    "string_view": "c"
+    "string_view": "c",
+    "random": "c"
   }
 }

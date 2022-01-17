@@ -22,70 +22,10 @@ https://doc.libsodium.org/installation
 */
 
 #include "./../terminal_color_fun/ansi_color_constants.c"
-
-// dump not die
-// currently only working for integers
-#define dnd(var)\
-   printf("\n");\
-   print_current_unix_timestamp_formatted();\
-   printf(": %s : ", #var);\
-   printf("%i", var);\
-   printf("\n");
-
-// dump not die
-// currently only working for long integers
-#define dndli(var)\
-   printf("\n");\
-   print_current_unix_timestamp_formatted();\
-   printf(": %s : ", #var);\
-   printf("%li", var);\
-   printf("\n");
+#include "./../c_helpers/dynamic_array.c"
+#include "./../c_helpers/dnd.c"
 
 
-int get_current_unix_timestamp(){
-   //  January 1st, 1970 at UTC
-   int n_current_unix_timestamp = (unsigned long)time(NULL);
-   return n_current_unix_timestamp;
-}
-
-void print_current_unix_timestamp_formatted(){
-
-   // January 1st, 1970 at UTC
-   int n_current_unix_timestamp = get_current_unix_timestamp();
-
-   // int n_years = n_current_unix_timestamp / (60.0*60*24*365) + 1970;
-   //int n_months = n_current_unix_timestamp / (60.0*60*24*365) + 1970;
-   //int n_days = n_current_unix_timestamp / (60.0*60*24) + 1970;
-
-   int n_seconds = (int) n_current_unix_timestamp % 60;
-   int n_minutes = (int) n_current_unix_timestamp % (60*60) / (60.0);
-   int n_hours = (int) n_current_unix_timestamp % (60*60*24) / (60.0*60);
-
-   //utc +1 or so
-   n_hours = (n_hours + 1) % 24;
-
-   // // char s_h_m_s[] = "00:00:00";
-   // printf("%05i", n_seconds);
-   // printf("%05i", n_minutes);
-   // printf("%05i", n_hours);
-
-   // char s_seconds_padded[] = "00";
-   // char s_minutes_padded[] = "00";
-   // char s_hours_padded[] = "00";
-
-   // sprintf(s_seconds_padded, "%02i", n_seconds);
-   // sprintf(s_minutes_padded, "%02i", n_minutes);
-   // sprintf(s_hours_padded, "%02i", n_hours);
-
-   // char s_unix_ts_formatted[] = "00:00:00";
-
-   // printf("%s:%s:%s", s_hours_padded, s_minutes_padded, s_seconds_padded);
-   printf(ANSI_BG_COLOR_UNSATURATED_BLACK "%i:%i:%i" ANSI_COLOR_RESET, n_hours, n_minutes, n_seconds);
-
-   // printf("%s", s_unix_ts_formatted);
-   // return s_unix_ts_formatted;
-   //return 1;
-}
 
 
 int random_int_between_exponents(int n_exponent_min, int n_exponent_max){
@@ -213,27 +153,124 @@ int get_e_by_m(uint32_t m){
    
 }
 int get_d_by_e_and_m(uint32_t e, uint32_t m){
-   int d;
+   long d;
 
    // d cannot have a same primefactor as m
    //extended euler algorhitm
-   int e_mod_m = 1;//1 placeholder
-   
+
+   uint32_t e_mod_m = 1;//1 placeholder
    uint32_t tmp_e = e; 
    uint32_t tmp_m = m; 
    uint32_t int_e_divided_by_m = 0;
+
+   long tmp_a = 0;
+   long tmp_b = 0;
+
+   Array a_e;
+   Array a_m; 
+   Array a_int_e_divided_by_m; 
+   Array a_e_mod_m;
+
+   Array a_a; 
+   Array a_b; 
+         
+   initArray(&a_e, 1);
+   initArray(&a_m, 1);
+   initArray(&a_int_e_divided_by_m, 1);
+   initArray(&a_e_mod_m, 1);
+   initArray(&a_a, 1);
+   initArray(&a_b, 1);
+   
+   //   for (i = 0; i < 100; i++)
+   //     insertArray(&a, i);  // automatically resizes as necessary
+   //   printf("%d\n", a.array[9]);  // print 10th element
+   //   printf("%d\n", a.used);  // print number of elements
+   //   freeArray(&a);
+
+   int n_counter = 0; 
    while(e_mod_m > 0){
-      
+
       e_mod_m = tmp_e % tmp_m;
+
+      
       int_e_divided_by_m = (int) tmp_e / tmp_m;
 
-      tmp_e = tmp_m; 
-      tmp_m = e_mod_m; 
-      
+      a_e.array[n_counter] = tmp_e;
+      a_m.array[n_counter] = tmp_a;
+      a_int_e_divided_by_m.array[n_counter] = int_e_divided_by_m;
+      a_e_mod_m.array[n_counter] = e_mod_m;
+
+      //used later, filled with 0 for now
+      a_a.array[n_counter] = 0;
+      a_b.array[n_counter] = 0;
+
+      printf("\n\neuclid algorithm step: %i", n_counter);
+
+      dnd(tmp_e);
+      dnd(tmp_m);
+      dnd(int_e_divided_by_m);
+      dnd(e_mod_m);
+
+      if(e_mod_m > 0){
+         tmp_e = tmp_m; 
+         tmp_m = e_mod_m;
+         
+         // wtf i have to take a look at pointers... 
+         //'grow' the arrays
+         //insertArray(&a_e, 0);
+         //insertArray(&a_m, 0);
+         //insertArray(&a_int_e_divided_by_m, 0);
+         //insertArray(&a_e_mod_m, 0);
+         //insertArray(&a_a, 0);
+         //insertArray(&a_b, 0);
+         
+         n_counter++;
+      }
+
    }
+
+
+   long n_a = 0; 
+   long n_b = 1; 
+   long last_a = 0; 
+   long last_b = 1; 
+
+   for(int i = n_counter; i >= 0; i--){
+      dnd(i);
+      dnd(a_int_e_divided_by_m.array[i]);
+   }
+   for(int i = n_counter; i >= 0; i--){
+
+      printf("\n\neuclid algorithm backwards step: %i", i);
+      
+      if(i == n_counter){
+         tmp_a = 0;
+         tmp_b = 1;
+      }else{
+         tmp_a = tmp_b;
+         tmp_b = a_a.array[i+1] - (a_int_e_divided_by_m.array[i] * a_b.array[i+1]);
+      }
+      dnd(a_a.array[i+1]);
+      dnd(a_int_e_divided_by_m.array[i]);
+      dnd(a_b.array[i+1]);
+      a_a.array[i] = tmp_a;
+      a_b.array[i] = tmp_b;
+
+      dndli(tmp_a);
+      dndli(tmp_b);
+   }
+
+   d = tmp_a; 
+   if(d < 0){
+      d = d + m; 
+   }
+   dndli(d);
 
    return d;
 }
+
+// int encrypt_message(int n_public_key, char[] s_message){}
+
 int main() {
    /* my first program in C */
    
@@ -261,8 +298,34 @@ int main() {
    uint32_t e = get_e_by_m(m);
 
    dnd(e);
-
-   uint32_t d = get_d_by_m(m);
    
+   uint32_t d = get_d_by_e_and_m(e, m); 
+
+   // static test numbers 
+
+   //p = 7; 
+   //q = 11; 
+   //n = 77; 
+   //m = 60; 
+   //e = 13; 
+   //uint32_t d = get_d_by_e_and_m(e, m); //should be 37
+
+
+
+   int n_public_key_n = n; 
+   int n_public_key_e = e; 
+
+   int n_private_key_n = n; 
+   int n_private_key_d = d; 
+
+
+   printf("\nhere's your key, keep it save!:\n");
+
+   dnd(n_public_key_n);
+   dnd(n_public_key_e);
+
+   dnd(n_private_key_n);
+   dnd(n_private_key_d);
+
    return 0;
 }
