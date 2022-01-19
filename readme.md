@@ -20,3 +20,15 @@ node create_new_folder_project.js variable_project_name
 
 # gdb cheat sheet  
 [c_cheat_sheet.md.txt](./c_cheat_sheet.md.txt)
+
+
+preufung vor ort 
+
+nachpruefung fuer leute die durchgefallen sind oder krank normalerweise 1/2 jahr speter 
+
+extra schnell nachpruefung 10 tage nach der ersten pruefung / mit aerztlicher bescheinigung
+
+nur noch einen 2. versuch falls durchgefallen
+
+nur einen stfit bei der klausur
+

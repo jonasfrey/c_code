@@ -27,7 +27,7 @@ void calc_string_length_outside_of_scope(char s_text[]){
    #include <string.h>
    int len = strlen(s_text);
 
-   printf("the stringlength is %i", len);
+   printf("\nthe stringlength is %i", len);
 
 }
 
@@ -48,6 +48,7 @@ void why_the_fuck_doesnt_this_work(char s_text[]){
    printf("%s", chars);
 
 }
+
 
 int main() {
    
@@ -97,7 +98,23 @@ int main() {
    //    int n_nat_nums [n_array_size] = {1,2,3,4,5,6,7,8,9,0}; 
 
 
-   
+   int a_nums[10];
+
+   //    printf("\n printf %%d, a_nums: %d", a_nums); // error: error: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘int *’ 
+   printf("\n printf %%p, a_nums: %p", a_nums);
+
+   //    printf("\n printf %%d, &a_nums: %d", &a_nums); // error: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘int (*)[10]’
+   printf("\n printf %%d, &a_nums: %p", &a_nums);
+
+   for(int i = 0; i < 10; i++){
+      printf("\nprintf %%d, a_nums[i]: %d", a_nums[i]);
+   }
+
+   //    int a_nums_pointer = (int)&a_nums; //error: cast from pointer to integer of different size
+   long a_nums_pointer = (long)&a_nums; 
+   printf("\n printf %%li, a_nums_pointer (&a_nums), %li", a_nums_pointer);
+
+   // printf("\n printf %%d, ")
    calc_string_length_outside_of_scope("test");
    
    return 0;
