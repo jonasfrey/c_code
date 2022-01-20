@@ -224,6 +224,7 @@ int main(int argc, char **argv) {
     d = opendir(s_path);
     char tmp_string[MAX_FILENAME_LENGTH];
     char * s_full_path_filename;
+    int n_counter = 0; 
 
     if (d) {
         while ((dir = readdir(d)) != NULL) {
@@ -246,10 +247,13 @@ int main(int argc, char **argv) {
                 // print_chars_of_string(s_full_path_filename);
                 //printf("\n%s", s_full_path_filename);
 
-                if(b_one_file_per_line){
-                    printf("\n");
-                }else{
-                    printf(" ");
+                if(n_counter > 0){
+
+                    if(b_one_file_per_line){
+                        printf("\n");
+                    }else{
+                            printf(" ");
+                    }
                 }
                 
                 printf("%s",dir->d_name);
@@ -261,6 +265,7 @@ int main(int argc, char **argv) {
                     }
                 }
             }
+            n_counter++;
         }
 
         closedir(d);
