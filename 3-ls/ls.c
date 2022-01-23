@@ -216,11 +216,28 @@ int main(int argc, char **argv) {
 
     // print_chars_of_string(s_path);
 
-    int n_items_length = 0;
     
 
     DIR *d;
     struct dirent *dir;
+    d = opendir(s_path);
+    int n_items_length = 0;
+
+    if (d) {
+        while ((dir = readdir(d)) != NULL) {
+            if(s_is_hidden_file(dir->d_name)){
+                continue;
+            }
+
+            n_items_length ++;
+        }
+
+        closedir(d);
+    }
+    //printf("NITEMSLEN%i", n_items_length);
+    char a_items[n_items_length][MAX_FILENAME_LENGTH*2+1];
+    char a_item_string[MAX_FILENAME_LENGTH*2];
+
     d = opendir(s_path);
     char tmp_string[MAX_FILENAME_LENGTH];
     char * s_full_path_filename;
@@ -231,14 +248,6 @@ int main(int argc, char **argv) {
             if(s_is_hidden_file(dir->d_name)){
                 continue;
             }
-            // hidden files start with "."
-            // current dir "." and parent dir ".." start with .
-            // hidden files, current dir, parent dir should be ignored
-            if(dir->d_name[0] == '.'){
-                continue;
-            }
-            n_items_length ++;
-
             if(!b_we_have_to_sort_aswell){
 
                 strcpy(tmp_string, s_path);
@@ -262,15 +271,22 @@ int main(int argc, char **argv) {
                     char s_suffix = get_suffix_char_for_file_detect_filetype(s_full_path_filename); 
                     if(s_suffix != S_CHAR_DEFAULT){
                         printf("%c", s_suffix);
+                        sprintf(a_item_string, "%s%c", dir->d_name, s_suffix);
+                    }else{
+                        sprintf(a_item_string, "%s", dir->d_name);
                     }
                 }
             }
             n_counter++;
+            strcpy(a_items[n_counter], a_item_string);
         }
 
         closedir(d);
     }
 
+    for(int i = 0; i < n_items_length; i++){
+        printf("\n%s", a_items[i]);
+    }
     if(!b_we_have_to_sort_aswell){
         return 0;
     }

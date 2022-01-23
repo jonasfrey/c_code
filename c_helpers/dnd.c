@@ -20,6 +20,18 @@
    printf(": %s : ", #var);\
    printf("%li", var);
 
+#define dnds(var)\
+   printf("\n");\
+   print_current_unix_timestamp_formatted();\
+   printf(": %s : ", #var);\
+   printf("%s", var);
+
+#define dndc(var)\
+   printf("\n");\
+   print_current_unix_timestamp_formatted();\
+   printf(": %s : ", #var);\
+   printf("%c", var);
+
 int get_current_unix_timestamp(){
    //  January 1st, 1970 at UTC
    int n_current_unix_timestamp = (unsigned long)time(NULL);
