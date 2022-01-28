@@ -23,6 +23,11 @@
     "typeinfo": "c",
     "string_view": "c",
     "random": "c",
-    "array": "c"
+    "array": "c",
+    "sstream": "c",
+    "stdlib.h": "c",
+    "usb.h": "c",
+    "libusb.h": "c",
+    "unistd.h": "c"
   }
 }

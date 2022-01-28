@@ -1,8 +1,8 @@
 
-CFLAGS = -Wall -Werror -g -O0
+CFLAGS = -Wall  -g -O0
 
 pointers_lesson: pointers_lesson.c
-	gcc $(CFLAGS) pointers_lesson.c -o pointers_lesson
+	gcc $(CFLAGS) pointers_lesson.c -o pointers_lesson -lm
 
 clean:
 	rm -f pointers_lesson

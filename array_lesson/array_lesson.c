@@ -1,6 +1,9 @@
 
 // c file 
 #include <stdio.h>
+#include <stdlib.h>
+#include "./../c_helpers/dnd.c"
+
 
 void print_with_newline_prefix(char s_text[]){
 
@@ -50,8 +53,8 @@ void why_the_fuck_doesnt_this_work(char s_text[]){
 }
 
 
-int main() {
-   
+void simple_arrays(){
+
    // arrays are defined as follows 
 
    // type arrayName [ arraySize ];
@@ -117,9 +120,87 @@ int main() {
    // printf("\n printf %%d, ")
    calc_string_length_outside_of_scope("test");
    
+
+}
+
+
+void array_of_strings(){
+
+   int n_items = 4; 
+   int n_bytes_to_reserve = n_items * sizeof(char *);
+
+   char ** a_array = malloc(n_bytes_to_reserve); // 3 * 8 = 24
+
+   a_array[0] = "a. 123 so this can be as long as i want, really ? really really ? really really ? really really ? really really ? really really ? really really ? really really ? really really ? really really ? ";
+   a_array[1] = "b. 123";
+   a_array[2] = "c. 123";
+   // a_array[4] = "fourht"; // ? segmentation fault (core dumped)
+   // a_array[5] = "fifth";
+
+   // a_array[3] = "asdf";
+
+   // dnds(a_array[0]);
+   // dnds(a_array[1]);
+
+   dnds("pointer to start of array");
+   dnd(&a_array);
+
+   dnds("pointer to first element in array? ");
+   dnd(&a_array[0]);
+   
+   dnds("first value of first element in array,(formatted as int)");
+   dnd(*a_array[0]);
+   
+   dnds("first value of first element in array,(formatted as char)");
+   dndc(*a_array[0]);
+   
+   dnds("first value of first element in array,(formatted as string)");
+   dnds(a_array[0]);
+   
+   dnd(&a_array[0]);
+
+    int i = 0 ;
+    while(a_array[i] != NULL){
+       dnd(&a_array[i]);
+       dnds(a_array[i]);
+       i++;
+    }
+
+   // dnd(sizeof(char *)); // is 8
+
+}
+
+
+void array_of_strings_dynamic(){
+
+   char ** a_array = malloc(3 * sizeof(char*));
+   dnds(a_array[0]);
+   dnds(a_array[1]);
+   dnds(a_array[2]);
+   int i = 0 ;
+   while(a_array[i] != NULL){
+       dnd(&a_array[i]);
+       dnds(a_array[i]);
+       i++;
+   }
+   // dnds(a_array[3]); // segmentation fault
+}
+
+void simple_malloc(){
+   char ** a_array = malloc(3 * sizeof(char*));
+   dnds(a_array[0]);
+   dnds(a_array[1]);
+   dnds(a_array[2]);
+   // dnds(a_array[3]); // segmentation fault
+}
+
+int main() {
+   
+   // array_of_strings();
+
+   array_of_strings_dynamic();
+
    return 0;
-
-
 }
 
 

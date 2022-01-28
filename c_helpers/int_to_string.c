@@ -3,7 +3,12 @@
 #include <limits.h> // INT_MIN and INT_MAX
 
 #include <math.h> // dont forget gcc -lm link math
+
+#ifndef INCLUDED_INT_TO_STRING 
+#define INCLUDED_INT_TO_STRING 1
 #include "./dnd.c"
+
+#endif
 
 long f_n_decimal_places_in_integer_static(long n_long){
 
@@ -44,7 +49,7 @@ long f_n_decimal_places_in_integer(long n_long){
 }
 
 
-const char* int_to_string(long n_int){ 
+char * int_to_string(long n_int){ 
     
     //dndli(n_int);
 
@@ -55,8 +60,9 @@ const char* int_to_string(long n_int){
     //dnd(n_single_quotes);
 
     int n_number_as_string_length = n_decimal_places;
-    int n_number_as_string_length_with_null_terminator = n_number_as_string_length + 1; 
-    char s_number_as_string[n_number_as_string_length_with_null_terminator];
+    int n_number_as_string_length_with_null_terminator = n_number_as_string_length + 1;
+
+    char * s_number_as_string = malloc(n_number_as_string_length_with_null_terminator);
 
     sprintf(s_number_as_string, "%li",n_int);
     if(n_single_quotes == 0){
@@ -64,10 +70,12 @@ const char* int_to_string(long n_int){
     }
     //dnds(s_number_as_string);
 
+
     int n_number_as_string_with_single_quotes_length = n_decimal_places+n_single_quotes;
     int n_number_as_string_with_single_quotes_length_with_null_terminator = n_number_as_string_with_single_quotes_length + 1; 
     
-    char s_number_as_string_with_single_quotes[n_number_as_string_with_single_quotes_length_with_null_terminator];
+    char * s_number_as_string_with_single_quotes = malloc(n_number_as_string_with_single_quotes_length_with_null_terminator);
+
     s_number_as_string_with_single_quotes[n_number_as_string_with_single_quotes_length_with_null_terminator-1] = '\0';
     
 
@@ -84,10 +92,13 @@ const char* int_to_string(long n_int){
         counter++;
 
     }
+    
+
     //dnd(n_number_as_string_length);
     //dnds(s_number_as_string_with_single_quotes)
 
     return s_number_as_string_with_single_quotes;
+    // s_string_pointer = s_number_as_string;
     //return s_number_as_string_with_single_quotes;
     //char str[ENOUGH];
     //sprintf(str, "%d", 42);
@@ -123,69 +134,70 @@ void f_test_f_n_decimal_places_in_integer_logarithmic(){
     //return 0; 
     
 }
-int main(){
-
+void testing_int_to_string(){
     // f_test_decimal_places_in_integer_logarhitmic();
-    int n = (123123);
-    char s = int_to_string(n);
-    dnd(n);
-    dnds(*s); // 123'123
+    long n;
     n = (123123123);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s); // 123'123'123
-    n = (12312312312);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s); // 12'312'312'312
-    n = (1);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (123);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (1234);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (12345);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (123456);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (1234567);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (12345678);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (123456789);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (1234567891);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (12345678912);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (123456789123);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    n = (1234567891234);
-    s = int_to_string(n);
-    dnd(n);
-    dnds(*s );
-    
-    return 0; 
+    char * s = int_to_string(n);
+    printf("number as string %s", s);
+    // dnd(n);
+    // dnds(s);
+    // n = (12312312312);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (1);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (123);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (1234);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (12345);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (123456);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (1234567);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (12345678);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (123456789);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (1234567891);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (12345678912);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (123456789123);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
+    // n = (1234567891234);
+    // s = int_to_string(n);
+    // dnd(n);
+    // dnds(s);
 }
+// int main(){
+
+
+//     testing_int_to_string();
+//     return 0; 
+// }

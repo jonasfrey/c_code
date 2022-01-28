@@ -2,35 +2,39 @@
     #include "./../terminal_color_fun/ansi_color_constants.c"
 #endif
 
+#include <stdlib.h>
+
 #include <time.h>
+#ifndef INCLUDED_INT_TO_STRING
+#define INCLUDED_INT_TO_STRING 1
+#include "./int_to_string.c"
+#endif
 
 // dump not die
 // currently only working for integers
 #define dnd(var)\
-   printf("\n");\
    print_current_unix_timestamp_formatted();\
    printf(": %s : ", #var);\
-   printf("%i", var);
+   printf("%s", int_to_string((long)var));\
+   printf("\n");
 
-// dump not die
-// currently only working for long integers
 #define dndli(var)\
-   printf("\n");\
    print_current_unix_timestamp_formatted();\
    printf(": %s : ", #var);\
-   printf("%li", var);
+   printf("%s", int_to_string((long)var));\
+   printf("\n");
 
 #define dnds(var)\
-   printf("\n");\
    print_current_unix_timestamp_formatted();\
    printf(": %s : ", #var);\
-   printf("%s", var);
+   printf("%s", var);\
+   printf("\n");
 
 #define dndc(var)\
-   printf("\n");\
    print_current_unix_timestamp_formatted();\
    printf(": %s : ", #var);\
-   printf("%c", var);
+   printf("%c", var);\
+   printf("\n");
 
 int get_current_unix_timestamp(){
    //  January 1st, 1970 at UTC

@@ -137,6 +137,14 @@ void unicode_stuff(){
 
 
    dnd(get_strlengt_of_unicode_string(arabic_alif));
+
+}
+
+
+void string_by_index(){
+   char * s_test = "asdf=1=2";
+
+   printf("%s", s_test);
 }
 
 int main() {
@@ -145,9 +153,11 @@ int main() {
 
    // strlen_and_strnlen();
 
-   unicode_stuff();
+   // unicode_stuff();
 
 
    // strings_in_different_scopes()
+
+   string_by_index();
    return 0;
 }
