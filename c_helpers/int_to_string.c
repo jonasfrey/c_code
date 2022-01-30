@@ -48,8 +48,48 @@ long f_n_decimal_places_in_integer(long n_long){
     return f_n_decimal_places_in_integer_static(n_long);
 }
 
+char * int_to_string(long n_num){
+    // char s[2] = "a";
+    char * s = malloc(2);
+    s = "a";
+    free(s);
+    return s;
+    
+    // char * s_num_as_string = malloc(1); 
+    // s_num_as_string = '\0'; 
 
-char * int_to_string(long n_int){ 
+    // float n_divisor = 10.0;
+    // int n_digit_after_first_decimal_place = 1;
+    // int n_i =0; 
+
+    // while(n_digit_after_first_decimal_place > 0){
+    //     n_i++;
+        
+    //     // before 'asdf '
+    //     //          >>>> shift every char +1 
+    //     // after  ' asdf'
+    //     for(int n_j= strlen(s_num_as_string); n_j>=0; n_j--){
+    //         s_num_as_string[n_j] = s_num_as_string[n_j-1]; 
+    //     }
+        
+    //     s_num_as_string = realloc(s_num_as_string,n_i+1);
+        
+    //     if(n_i % 3 == 0){
+    //         s_num_as_string[n_i] = '\'';
+    //     }else{
+    //         float n_res = n_num / n_divisor;
+    //         n_digit_after_first_decimal_place = (int)(n_res * 10) % 10;
+    //         s_num_as_string[n_i] = n_digit_after_first_decimal_place;    
+    //         n_divisor *= 10;
+    //     }
+
+    // }
+
+    // return s_num_as_string;
+}
+
+
+char * int_to_string_old(long n_int){ 
     
     //dndli(n_int);
 
@@ -63,8 +103,8 @@ char * int_to_string(long n_int){
     int n_number_as_string_length_with_null_terminator = n_number_as_string_length + 1;
 
     char * s_number_as_string = malloc(n_number_as_string_length_with_null_terminator);
-
     sprintf(s_number_as_string, "%li",n_int);
+    
     if(n_single_quotes == 0){
         return s_number_as_string;
     }
@@ -92,7 +132,7 @@ char * int_to_string(long n_int){
         counter++;
 
     }
-    
+    free(s_number_as_string);
 
     //dnd(n_number_as_string_length);
     //dnds(s_number_as_string_with_single_quotes)
@@ -140,6 +180,7 @@ void testing_int_to_string(){
     n = (123123123);
     char * s = int_to_string(n);
     printf("number as string %s", s);
+
     // dnd(n);
     // dnds(s);
     // n = (12312312312);

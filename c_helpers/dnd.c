@@ -10,13 +10,21 @@
 #include "./int_to_string.c"
 #endif
 
+#define dndi(var)\
+   print_current_unix_timestamp_formatted();\
+   printf(": %s : ", #var);\
+   printf("%s", int_to_string((long)var));\
+   printf("\n");
+
 // dump not die
 // currently only working for integers
 #define dnd(var)\
    print_current_unix_timestamp_formatted();\
    printf(": %s : ", #var);\
-   printf("%s", int_to_string((long)var));\
+   char * int_as_string = int_to_string((long)var);\
+   printf("%s", int_as_string);\
    printf("\n");
+   // free(int_as_string);
 
 #define dndli(var)\
    print_current_unix_timestamp_formatted();\
