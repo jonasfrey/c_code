@@ -148,6 +148,11 @@ void stack_overflow_int_array(){
    for(int i = 0; i<(10000000); i++){
       if(i%10000 == 0){
          printf("   array size: %20i\n", i);
+         long stack_size_bytes = (i * sizeof(int)); 
+         float stack_size_kilobytes = stack_size_bytes /1024.0;
+         float stack_size_megabytes = stack_size_kilobytes /1024.0;
+
+         printf("   stack used: %li Bytes, %.2fKB, %.2fMB", stack_size_bytes, stack_size_kilobytes, stack_size_megabytes);
          int huge_int_array[i];
          huge_int_array[0] = 11235; 
          printf("huge_int_array[0]: %20i\n", huge_int_array[0]);

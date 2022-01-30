@@ -5,37 +5,7 @@
 #include <stdlib.h>
 
 #include "./../c_helpers/dnd.c"
-
-#define typename(x) _Generic((x),                                      \
-                             _Bool                                     \
-                             : "_Bool", unsigned char                  \
-                             : "unsigned char",                        \
-                               char                                    \
-                             : "char", signed char                     \
-                             : "signed char",                          \
-                               short int                               \
-                             : "short int", unsigned short int         \
-                             : "unsigned short int",                   \
-                               int                                     \
-                             : "int", unsigned int                     \
-                             : "unsigned int",                         \
-                               long int                                \
-                             : "long int", unsigned long int           \
-                             : "unsigned long int",                    \
-                               long long int                           \
-                             : "long long int", unsigned long long int \
-                             : "unsigned long long int",               \
-                               float                                   \
-                             : "float", double                         \
-                             : "double",                               \
-                               long double                             \
-                             : "long double", char *                   \
-                             : "pointer to char",                      \
-                               void *                                  \
-                             : "pointer to void", int *                \
-                             : "pointer to int",                       \
-                               default                                 \
-                             : "other")
+#include "./../c_helpers/typename.c"
 
 char *substr(const char *src, int n_start, int n_end)
 {
@@ -93,6 +63,17 @@ void string_literal_and_modifiable_array(){
    printf(" string literal: %s\n", this_is_a_string_literal_and_cannot_be_modified);
    printf(" char array: %s\n", this_is_a_char_array_and_can_be_modified);
 
+}
+
+void string_readonly_and_modifiable_array(){
+   char * pointer_to_readonly_memory_string = "asdf";
+   char pointer_to_memory_on_the_stack[] = "asdf";
+
+   // pointer_to_readonly_memory_string[0] = 'b'; // segmentation fault
+   pointer_to_memory_on_the_stack[0] = 'b';
+
+   printf(" pointer_to_readonly_memory_string: %s\n", pointer_to_readonly_memory_string);
+   printf(" pointer_to_memory_on_the_stack: %s\n", pointer_to_memory_on_the_stack);
 }
 
 void strtok_not_working()
@@ -331,5 +312,7 @@ int main()
    // strtok_not_working();
 
    string_literal_and_modifiable_array();
+   string_readonly_and_modifiable_array();
+
    return 0;
 }
