@@ -5,6 +5,5 @@
 #define S(X) #X
 int main(int argc, char **argv)
 {
-   printf("%c\n",
-          *S(5));
+   printf("%c\n",*S(5));
 }
