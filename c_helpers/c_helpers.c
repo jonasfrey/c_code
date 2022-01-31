@@ -7,6 +7,8 @@
 #include <time.h>
 #include <errno.h>    
 
+#include "./int_to_string.c"
+
 
 // struct timespec {
 //     time_t tv_sec;        /* seconds */
@@ -48,26 +50,43 @@ struct variable {
 };
 
 
+void int_to_string_test(){
+   int i; 
+   char * str; 
+   i = 12341234; 
+   str = int_to_string(i); 
+   printf("%s\n", str);
+
+   i = 117300; 
+   str = int_to_string(i); 
+   printf("%s\n", str);
+
+   str = int_to_string(8446744073709551616Lu); 
+   printf("%s\n", str);
+
+   str = int_to_string(-8446744073709551616L); 
+   printf("%s\n", str);
+   
+   long long n_i = 2;
+   int n_exponent = 1;
+   
+   while(n_i < powl(2, 62)){
+      n_exponent++;
+
+      n_i = n_i*2;
+      str = int_to_string(n_i); 
+      printf("%25s: 2^%2i : %2i bit \n", str, n_exponent, n_exponent+1);
+      // printf("%li\n", i);
+   }
+}
 int main() {
    /* my first program in C */
-   printf("main function called");
-   
+   int_to_string_test();
+
    return 0;
 }
 
 
-#define typename(x) _Generic((x),        /* Get the name of a type */             \
-                                                                                  \
-        _Bool: "_Bool",                  unsigned char: "unsigned char",          \
-         char: "char",                     signed char: "signed char",            \
-    short int: "short int",         unsigned short int: "unsigned short int",     \
-          int: "int",                     unsigned int: "unsigned int",           \
-     long int: "long int",           unsigned long int: "unsigned long int",      \
-long long int: "long long int", unsigned long long int: "unsigned long long int", \
-        float: "float",                         double: "double",                 \
-  long double: "long double",                   char *: "pointer to char",        \
-       void *: "pointer to void",                int *: "pointer to int",         \
-      default: "other")
 
 // #define dd(var)\\"
    

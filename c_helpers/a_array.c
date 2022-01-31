@@ -34,3 +34,4 @@ void array_free(A_array *a) {
   a->array = NULL;
   a->length = a->full_size = 0;
 }
+

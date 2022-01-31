@@ -13,7 +13,7 @@
 #define dndi(var)\
    print_current_unix_timestamp_formatted();\
    printf(": %s : ", #var);\
-   printf("%s", int_to_string((long)var));\
+   printf("%i", var);\
    printf("\n");
 
 // dump not die
@@ -21,15 +21,14 @@
 #define dnd(var)\
    print_current_unix_timestamp_formatted();\
    printf(": %s : ", #var);\
-   char * int_as_string = int_to_string((long)var);\
-   printf("%s", int_as_string);\
+   printf("%s", int_to_string((long long)var));\
    printf("\n");
    // free(int_as_string);
 
 #define dndli(var)\
    print_current_unix_timestamp_formatted();\
    printf(": %s : ", #var);\
-   printf("%s", int_to_string((long)var));\
+   printf("%s", int_to_string((long long)var));\
    printf("\n");
 
 #define dnds(var)\

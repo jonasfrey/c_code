@@ -1,5 +1,5 @@
 
-CFLAGS = -Wall -Werror -g -O0
+CFLAGS = -Wall  -g -O0
 
 malloc_lesson: malloc_lesson.c
 	gcc $(CFLAGS) malloc_lesson.c -o malloc_lesson

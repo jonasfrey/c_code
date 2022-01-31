@@ -1,5 +1,5 @@
 
-CFLAGS = -Wall -Werror -g -O0
+CFLAGS = -Wall -g -O0
 
 final_sample_loop: final_sample_loop.c
 	gcc $(CFLAGS) final_sample_loop.c -o final_sample_loop

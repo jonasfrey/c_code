@@ -1,13 +1,13 @@
 #include <stdio.h>
 
 #include <limits.h> // INT_MIN and INT_MAX
-
+#include <stdlib.h>
 #include <math.h> // dont forget gcc -lm link math
+#include <string.h>
 
 #ifndef INCLUDED_INT_TO_STRING 
 #define INCLUDED_INT_TO_STRING 1
-#include "./dnd.c"
-
+// #include "./dnd.c" // bad idea to include a library which uses itself, recursion may happen ! 
 #endif
 
 long f_n_decimal_places_in_integer_static(long n_long){
@@ -48,44 +48,55 @@ long f_n_decimal_places_in_integer(long n_long){
     return f_n_decimal_places_in_integer_static(n_long);
 }
 
-char * int_to_string(long n_num){
-    // char s[2] = "a";
-    char * s = malloc(2);
-    s = "a";
-    free(s);
-    return s;
+char * int_to_string(long long n_num){
     
-    // char * s_num_as_string = malloc(1); 
-    // s_num_as_string = '\0'; 
+    int n_num_as_string_length = 0;
+    int n_num_as_string_length_with_null_terminator = 1;
+    char * s_num_as_string = malloc(n_num_as_string_length_with_null_terminator); 
+    s_num_as_string[0] = '\0';
 
-    // float n_divisor = 10.0;
-    // int n_digit_after_first_decimal_place = 1;
-    // int n_i =0; 
+    double n_divisor = 10.0;
+    int n_digit_after_first_decimal_place = 1;
+    int n_i = 1;    
+    int n_zero_padding = 0; 
+    
+    while(1){
 
-    // while(n_digit_after_first_decimal_place > 0){
-    //     n_i++;
+        double n_res = n_num / n_divisor;
+        // printf("%f", n_res);
+        if(n_res < 1.0/(pow(10.0, 1+n_zero_padding))) break;
+
+        n_digit_after_first_decimal_place = (long long)(n_res * 10) % 10;
+        n_num_as_string_length++;
+        n_num_as_string_length_with_null_terminator++;
+
+        s_num_as_string = realloc(s_num_as_string,n_num_as_string_length_with_null_terminator);
         
-    //     // before 'asdf '
-    //     //          >>>> shift every char +1 
-    //     // after  ' asdf'
-    //     for(int n_j= strlen(s_num_as_string); n_j>=0; n_j--){
-    //         s_num_as_string[n_j] = s_num_as_string[n_j-1]; 
-    //     }
-        
-    //     s_num_as_string = realloc(s_num_as_string,n_i+1);
-        
-    //     if(n_i % 3 == 0){
-    //         s_num_as_string[n_i] = '\'';
-    //     }else{
-    //         float n_res = n_num / n_divisor;
-    //         n_digit_after_first_decimal_place = (int)(n_res * 10) % 10;
-    //         s_num_as_string[n_i] = n_digit_after_first_decimal_place;    
-    //         n_divisor *= 10;
-    //     }
+        // s_num_as_string = (char *) realloc(s_num_as_string, n_i+1);
+        // before 'asdf '
+        //          >>>> shift every char +1 
+        // after  ' asdf'
+        for(int n_j= n_num_as_string_length-1; n_j>=1; n_j--){
+            s_num_as_string[n_j] = s_num_as_string[n_j-1]; 
+        }
 
-    // }
+        if(n_i % 4 == 0){
+            // s_num_as_string[n_i] = '\'';
+            s_num_as_string[0] = '\'';
 
-    // return s_num_as_string;
+        }else{
+            //printf("%i\n", n_digit_after_first_decimal_place);
+            s_num_as_string[0] = (char) n_digit_after_first_decimal_place+'0';// '0' evaluates to 48dec which is 0 in ascii table    
+            n_divisor *= 10;
+
+        }
+        n_i++;
+
+        s_num_as_string[n_num_as_string_length_with_null_terminator-1] = '\0';
+
+    }
+    
+    return s_num_as_string;
 }
 
 
@@ -236,9 +247,3 @@ void testing_int_to_string(){
     // dnd(n);
     // dnds(s);
 }
-// int main(){
-
-
-//     testing_int_to_string();
-//     return 0; 
-// }

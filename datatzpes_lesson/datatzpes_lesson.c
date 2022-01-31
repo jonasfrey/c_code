@@ -2,11 +2,8 @@
 // c file 
 #include <stdio.h>
 
-int main() {
-   /* my first program in C */
-   printf("main function called");
-   
-   //cast to int 
+void simple_types(){
+      //cast to int 
    // does it get rounded  up or down?
    printf("\n(int) 1.2: %i", (int) 1.2); // round down to 1?
    printf("\n(int) 1.8:  %i", (int) 1.8); // round up to 2?
@@ -74,5 +71,42 @@ int main() {
    printf("\n(float) 1.8:  %f", (float) 1.8);
 
    return 0;
+}
+void i_call_them_custom_types(){
+
+   size_t asdf = 1;
+   //where is size_t defined?
+   // in my system it is in stddef.h
+   // typedef __SIZE_TYPE__ size_t;
+
+   // __SIZE_TYPE__ is defined in
+   // grep -rnw '/usr/lib/' -e '#define __SIZE_TYPE__'
+   ///usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h:206:#define __SIZE_TYPE__ long unsigned int
+
+
+}
+
+//we can define our own type 
+
+typedef long unsigned int pointer_as_long;
+
+void own_datatype(){
+   // now we can use our type 
+
+   pointer_as_long cool = 12341234; 
+   printf("%li\n", cool);
+}
+
+int main() {
+   /* my first program in C */
+   printf("main function called\n");
+   
+   // simple_types();
+
+   // i_call_them_custom_types();
+
+   own_datatype();
+
+
 
 }

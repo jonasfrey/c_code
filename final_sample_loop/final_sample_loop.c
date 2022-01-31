@@ -12,5 +12,8 @@ int foo(int i)
 }
 int main()
 {
-   return i + foo(4);
+   printf("%i", i);
+   printf("%i", i + foo(4));
+   return 0;
+   // return i + foo(4);
 }

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "./../c_helpers/dnd.c"
 
 const char * i_will_modify_the_string(char * s_param){
 
@@ -30,9 +31,7 @@ char * i_dont_do_anything_to_the_string(char * s_param){
    // return (char *)"asdf";
 }
 
-int main() {
-   /* my first program in C */
-   printf("main function called");
+void modify_a_string_in_another_scope(){
    
    char *im_a_string = "asdfasdf"; 
 
@@ -40,6 +39,60 @@ int main() {
    im_a_string = (i_dont_do_anything_to_the_string(im_a_string));
    // im_a_string = (i_will_modify_the_string(im_a_string));
    printf("\n%s",  im_a_string);
+
+}
+
+
+int i_add_one_to_an_int(int n){
+   dnds(__func__);
+   dnd(n);
+   dnd(&n);
+   n = n+1; 
+   return n;
+}
+void int_pointer_address_in_differen_scopes(){
+
+   dnds(__func__);
+   int n = 5;  
+
+   dnd(n);
+   dnd(&n);
+
+   n = i_add_one_to_an_int(n); 
+
+   dnds(__func__);
+
+   dnd(n);
+   dnd(&n);
+
+   n = i_add_one_to_an_int(n);
+}
+
+void malloc_address_in_different_scopes(){
+
+   dnds(__func__);
+   int *n = malloc(sizeof(int));
+   
+   n = 10;
+
+   dnd(n);
+   dnd(&n);
+
+   n = i_add_one_to_an_int(n); 
+
+   dnds(__func__);
+
+   dnd(n);
+   dnd(&n);
+
+   n = i_add_one_to_an_int(n);
+}
+int main() {
+
+   // modify_a_string_in_another_scope();
+   // int_pointer_address_in_differen_scopes();
+   
+   malloc_address_in_different_scopes();
 
    return 0;
 }

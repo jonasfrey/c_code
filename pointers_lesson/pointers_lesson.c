@@ -417,6 +417,69 @@ void dynamically_create_string(){
 
 
 }
+void get_value_of_random_address(){
+
+   //    can we get some random value ?
+   //    no 
+   // dnd(*(int *)123123123); // segmentation fault
+
+   // int a = 11235; 
+   // dnd(&a); // that pointer value was 140'734'676'758'836
+   //    can we now get the value at that pointer ? 
+   //    no
+   // dnd(*(int *)140734676758836); // segmentation fault
+
+   int a = 11235; 
+   int * int_pointer_adress_of_a =  &a; 
+   int p_adress_of_a = &a; // this will corrupt the pointer value if not sizeof(int*) != sizeof(int)
+   dnd(sizeof(int*));
+   dnd(sizeof(int));
+   long li_adress_of_a = (long) &a;
+
+   printf("%p\n", int_pointer_adress_of_a);
+   printf("%p\n", p_adress_of_a);
+   printf("%li\n", li_adress_of_a);
+   
+   int value_at_address_of_a = *int_pointer_adress_of_a;
+   printf("%i\n", value_at_address_of_a);
+
+   int value_at_address_of_a2 = *(int *)li_adress_of_a; // to readout a adress by a long we have to convert the long to an int pointer (int *) and then derefence it by adding * in front 
+   printf("%i\n", value_at_address_of_a);
+  
+   //    can we change the value by the pointer long 
+   *(int *)li_adress_of_a = 8888;
+   dnd(a);
+   //    yes !!
+   *int_pointer_adress_of_a = 9999;
+   dnd(a);
+
+
+   //    can we manually assign a address ? 
+
+   long long_address_of_pointer = 150000000000000;
+   int * int_pointer_data_type_adress = (int *) long_address_of_pointer;
+   printf("%p", int_pointer_adress_of_a);
+   
+   dnd(*(int*)long_address_of_pointer); // segmentation fault , we cannot just read out a value at a random address
+
+   //    can we assign a value at a random address? 
+   *(int*)long_address_of_pointer = 1234; // segmentation fault, we cannot just change a value at a random address
+
+}
+
+void printing_pointer_as_long(){
+   // int a = 1234; 
+   // printf("%li\n", (long)&a);
+   // printf("%li\n", (long)(&a));
+
+   int b = 4312; 
+   int address_of_b = (long) &b;
+   int second_address_of_b = (long) (&b);
+   printf("%li\n", address_of_b);
+   printf("%li\n", second_address_of_b);
+
+
+}
 int main() {
    
    //why_is_this_not_working();
@@ -437,8 +500,11 @@ int main() {
    //initializing_string_problems();
 
    //dynamically_create_string();
+   
+   get_value_of_random_address();
 
-    char_info();
+   // printing_pointer_as_long();
+   //  char_info();
    //string_info();
    return 0;
 }

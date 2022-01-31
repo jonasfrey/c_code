@@ -12,19 +12,26 @@ int f()
    printf("f ");
    return 0;
 }
-int main(int argc, char **argv)
+
+void and_operators()
 {
    printf("%d %d\n", t() & f(), f() && t());
 }
 
-int what_is_the_output_of_this(int argc, char ** argv) {
-printf("%1.0f %3.0f\n", 10.0, 0.0);
+void what_is_the_output_of_this() {
+   // printf("%1.0f %3.0f\n", 10.01234, 0.01234);
+   // printf("%.1f %.3f\n", 10.01234, 0.01234);
+   // printf("%.1f %.3f\n", 10.0, 0.0
+   printf("%1.0f %3.0f\n", 10.0, 0.0); 
 }
 
 int main()
 {
+   // int x = 0;
+
+   printf("%_5d\n", 10);
    /* my first program in C */
-   printf("main function called");
+   what_is_the_output_of_this();
 
    return 0;
 }
