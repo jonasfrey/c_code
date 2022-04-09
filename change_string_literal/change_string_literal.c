@@ -1,6 +1,8 @@
 
 // c file 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void f_change_content_of_string_literal(){
    
@@ -42,11 +44,72 @@ void f_same_string_literal_different_pointer_questionmark(){
    
 }
 
+void f_i_take_strings(
+   char * s_literal_readonly,
+   char * s_stack_string,
+   char * s_malloc_heap_string
+){
+   printf("f_i_take_strings\n");
+
+   printf("address of s_literal_readonly: %p\n", s_literal_readonly);
+   printf("address of s_stack_string: %p\n", s_stack_string);
+   printf("address of s_malloc_heap_string: %p\n", s_malloc_heap_string);
+
+   //there are different ways to set the string
+   // memset
+   // memset(s_literal_readonly, 65, 4); // we cannot change read only string literals
+   // memset(s_stack_string, 65, 4);
+   // memset(s_malloc_heap_string, 65, 4);
+
+   // array access with brackets [n_index]
+   // int n_i = 0; 
+   // while(n_i < 10){
+   //    s_stack_string[n_i] = 65;
+   //    n_i++; 
+   // }
+
+   //strcpy
+   // strcpy(s_stack_string, "a s d f");
+   // strcpy(s_malloc_heap_string, "hello");
+
+
+}
+
+void f_string_address_in_two_scopes(){
+   printf("f_string_address_in_two_scopes\n");
+
+   char * s_literal_readonly = "i am a static readonly literal";
+   char s_stack_string[100] = "i am a strring on the stack"; 
+   char * s_malloc_heap_string = malloc(100);
+
+   printf("address of s_literal_readonly: %p\n", s_literal_readonly);
+   printf("address of s_stack_string: %p\n", s_stack_string);
+   printf("address of s_malloc_heap_string: %p\n", s_malloc_heap_string);
+
+
+   printf("before f_i_take_string: %s\n", s_literal_readonly);
+   printf("before f_i_take_string: %s\n", s_stack_string);
+   printf("before f_i_take_string: %s\n", s_malloc_heap_string);
+
+   f_i_take_strings(
+      s_literal_readonly,
+      s_stack_string,
+      s_malloc_heap_string
+   );
+
+   
+   printf("after f_i_take_string: %s\n", s_literal_readonly);
+   printf("after f_i_take_string: %s\n", s_stack_string);
+   printf("after f_i_take_string: %s\n", s_malloc_heap_string);
+
+}
+
 int main() {
 
    // f_change_content_of_string_literal();
    // f_change_whole_string_literal();
-   f_same_string_literal_different_pointer_questionmark();
+   // f_same_string_literal_different_pointer_questionmark();
+   f_string_address_in_two_scopes();
    return 0;
 }
 
