@@ -25,7 +25,7 @@ if (!fs.existsSync(dir)){
 
  
 var makefile_content = `
-CFLAGS = -Wall -Werror -g -O0
+CFLAGS = -Wall -Werror -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -g -O0
 
 ${folder_name}: ${folder_name}.c
 \tgcc $(CFLAGS) ${folder_name}.c -o ${folder_name}
