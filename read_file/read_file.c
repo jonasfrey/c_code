@@ -334,6 +334,9 @@ void f_binary_io_monochrome_ascii_image(){
    printf(S_ANSI_COLOR_GREEN "file buffer set!\n" S_ANSI_COLOR_RESET);
    }
 
+   printf("n_buffer_length:%i\n", n_buffer_length);
+
+
    int n_buffer_index = 0; 
    int n_pixel_x = 0;
    int n_pixel_y = 0;
