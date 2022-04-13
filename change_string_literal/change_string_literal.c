@@ -73,6 +73,19 @@ void f_i_take_strings(
    // strcpy(s_malloc_heap_string, "hello");
 
 
+   // [
+   //    0b1111 1111,// 94 201 786 114 464
+   //    //             ^
+   //    //             tri-              -llion
+   //    //                bi-            -llion
+   //    //                    mi-        -llion
+   // ]
+
+   // 1 byte = 8 bit 
+   // 1 kilobyte = 1024 byte , 
+   // 1 kibibyte = 1000 byte
+   
+
 }
 
 void f_string_address_in_two_scopes(){

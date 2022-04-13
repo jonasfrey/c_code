@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+struct O_point_2_d{
+   long n_x; 
+   long n_y;
+};
 struct O_dynamic_struct{
    char * s_dynamic_sized;
    long n_length_s_dynamic_sized; 
@@ -40,10 +44,25 @@ void f_dynamic_length_array_of_structs(){
    printf("strlen(o_dynamic_struct_2.s_dynamic_sized): %li\n", strlen(o_dynamic_struct_2.s_dynamic_sized));
 
 }
-struct O_point_2_d{
-   long n_x; 
-   long n_y;
-};
+
+void f_assign_data(struct O_point_2_d * o_point_2_d ){
+   o_point_2_d->n_x = 10;
+   o_point_2_d->n_y = 10;
+}
+
+void f_array_of_structs_assign_data_in_other_function(){
+   
+   struct O_point_2_d a_o_point_2_d[1000];
+   
+   f_assign_data(&a_o_point_2_d[0]);
+   f_assign_data(&a_o_point_2_d[1]);
+   f_assign_data(&a_o_point_2_d[2]);
+
+
+   printf("a_o_point_2_d[0]->n_x%li", a_o_point_2_d[0].n_x); 
+}
+
+
 void f_simple_struct(){
    struct O_point_2_d o_point_2_d;
    o_point_2_d.n_x = 2123; 
@@ -99,5 +118,6 @@ int main() {
 
    // f_simple_struct();
    // f_static_length_array_of_structs();
-   f_dynamic_length_array_of_structs();
+   // f_dynamic_length_array_of_structs();
+   f_array_of_structs_assign_data_in_other_function();
 }
