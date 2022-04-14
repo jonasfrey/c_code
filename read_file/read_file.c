@@ -280,12 +280,12 @@ void f_binary_io_fread(){
 
 }
 double f_d_normalized_by_n(
-   int n_uint8_ascii_from_33_to_126
+   int n_uint8_ascii_from_32_to_126
 ){
-   int n_start = 33; 
-   int n_end = 126; 
+   int n_start = 32; 
+   int n_end = 126;
    int n_range = n_end - n_start; 
-   return (n_uint8_ascii_from_33_to_126-n_start)/(n_range);
+   return (n_uint8_ascii_from_32_to_126-n_start)/(n_range);
 }
 
 int f_n_mai_pixel_index_by_xy(
@@ -293,16 +293,18 @@ int f_n_mai_pixel_index_by_xy(
    int n_y, 
    int n_buffer_length, 
    char * a_buffer_as_char_pointer, 
-   int b_last_char_is_newline
+   int b_last_char_is_newline, 
+   int n_width
 ){
    int n_newline = 1;
    // int n_index = n_heigth * (n_x+n_newline) + n_x + (b_last_char_is_newline * 1);
-   int n_index = n_y * (n_x+n_newline) + n_x;
+   int n_index = n_y * (n_width+n_newline) + n_x;
    return n_index;
 }
 void f_binary_io_monochrome_ascii_image(){
    // char * s_file_path_name = "./monochrome_ascii_image.mai";
-   char * s_file_path_name = "./monochrome_ascii_image_last_char_no_newline.mai";
+   char * s_file_path_name = "./fritz.mai";
+   // char * s_file_path_name = "./monochrome_ascii_image_last_char_no_newline.mai";
    char * s_fopen_mode_read_binary = "rb";
    FILE * n_pointer_to_file_struct = fopen(
       s_file_path_name,
@@ -351,8 +353,8 @@ void f_binary_io_monochrome_ascii_image(){
          n_image_width = n_buffer_index;
          break;
       }
-      printf("%c\n", n_value);
-      printf("%i\n", n_value);
+      // printf("%c\n", n_value);
+      // printf("%i\n", n_value);
       n_buffer_index++;
    }
 
@@ -393,7 +395,7 @@ void f_binary_io_monochrome_ascii_image(){
     for (y = 0; y < o_image.height; y++) {
         for (x = 0; x < o_image.width; x++) {
             pixel_t * pixel = pixel_at (&o_image, x, y);
-            int n_mai_index = f_n_mai_pixel_index_by_xy(x,y, n_buffer_length, a_buffer_as_char_pointer, b_last_character_is_newline);
+            int n_mai_index = f_n_mai_pixel_index_by_xy(x,y, n_buffer_length, a_buffer_as_char_pointer, b_last_character_is_newline, n_image_width);
             int n_value_normalized = f_d_normalized_by_n(a_buffer_as_char_pointer[n_mai_index]);
             uint8_t n_value_denormalized = n_value_normalized * (pow(2,8)-1);
 
