@@ -480,6 +480,45 @@ void printing_pointer_as_long(){
 
 
 }
+
+void f_pointer_arithmetic(){
+   // since there is no uint8 type in c we need to use a char !!!
+   char n_number = 188;
+
+   // now assume this
+   // |8 bits(one byte) |address/index    |
+   // |---              |---              |
+   // |.... ....        |4999             |
+   // |1010 1110        |5000             |
+   // |1111 0101        |5001             |
+   // |1010 1000        |5002             |
+   // |0001 1100        |5003             |
+   // |1010 0011        |5004             |
+   // |0101 1001        |5005             |
+   // |1011 1111        |5006             |
+   // |.... ....        |4999             |
+
+   // so if we allocate memory for two bytes / two chars
+   char * array_for_two_chars = malloc(2 * sizeof(char)); // malloc does take number of bytes as argument
+   
+
+   // the first adress should be a number 
+   // the second adress should be a number + 1
+   printf("address/index of array_for_two_chars    : %p\n", array_for_two_chars);      // 0x55f5be7a52a0
+   printf("address/index of array_for_two_chars+1  : %p\n",  array_for_two_chars+1);   // 0x55f5be7a52a1
+                                                                                       //              ^ indeed + 1
+                                                                                       
+   // now if we do the same for an int which is 4 bytes, the second address should be offset by 4!!!
+   int * array_of_two_ints = malloc(2 * sizeof(int)); 
+   printf("address/index of array_of_two_ints   : %p\n", array_of_two_ints);     // 0x55f5be7a56d0
+   printf("address/index of array_of_two_ints+1 : %p\n", array_of_two_ints+1);   // 0x55f5be7a56d4
+                                                                                 //              ^ indeed + 4
+   
+
+   // so there we go!!! this is fucking stupid as fuck i swear 
+   // ohni scheiss ey... 
+}
+
 int main() {
    
    //why_is_this_not_working();
@@ -501,7 +540,9 @@ int main() {
 
    //dynamically_create_string();
    
-   get_value_of_random_address();
+   // get_value_of_random_address();
+
+   f_pointer_arithmetic();
 
    // printing_pointer_as_long();
    //  char_info();
