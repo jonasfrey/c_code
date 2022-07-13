@@ -519,6 +519,75 @@ void f_pointer_arithmetic(){
    // ohni scheiss ey... 
 }
 
+void f_pointer_arithmetic_simple(){
+
+   // ok i am willing to go that far 
+   // n_ = number
+   // o_ = object
+   // a_ = array 
+   // s_ = string
+   // i_ = index
+   // f_ = function
+
+   char * i_char_single = malloc(1); // allocate 1 byte (returns a pointer/index)
+   long n_index_char_single = (long) i_char_single;
+
+   printf("adress %li\n", n_index_char_single);
+
+   char * i_char_array = malloc(10); // now we get 10 bytes
+   long n_index_char_array = (long) i_char_array;
+
+   printf("adress %li\n", n_index_char_array);
+
+   printf("since it is a datatype char(1 byte)\n");
+   printf("as we can see the index/adress increments always by +1=>(+1)\n");
+
+   printf("index/address   %p\n", i_char_array);
+   printf("index/address+1 %p\n", i_char_array+1);
+   printf("index/address+2 %p\n", i_char_array+2);
+   printf("index/address+3 %p\n", i_char_array+3);
+   printf("index/address+4 %p\n", i_char_array+4);
+   printf("index/address+5 %p\n", i_char_array+5);
+   printf("index/address+6 %p\n", i_char_array+6);
+   printf("index/address+7 %p\n", i_char_array+7);
+   printf("index/address+8 %p\n", i_char_array+8);
+   printf("index/address+9 %p\n", i_char_array+9);
+
+
+   printf("but ! , if we convert the index to a short index\n");
+   printf("since it is a datatype short(2 byte)\n");
+   printf("as we can see the index/adress increments always by +1=>(+2)\n");
+
+
+   short * i_char_array_short = i_char_array;
+   printf("index/address   %p\n", i_char_array_short);
+   printf("index/address+1 %p\n", i_char_array_short+1);
+   printf("index/address+2 %p\n", i_char_array_short+2);
+   printf("index/address+3 %p\n", i_char_array_short+3);
+
+   // i würd mau sägä d pointer arithmetik isch ja mau z dümmste wome het chönne mache ohni scheiss!
+   // wrum zum fick würdme mathematischi reglä bräche ohni witz, das isch huere behinderet
+   // me het sicher gmeint es machts am programmierer eifacher, aber dasser z ganze memory management mit "malloc" , "calloc" und "free" mues mache
+   // das isch de nid kompliziert... 
+   // wele hueresohn het das erfunde 
+
+   printf("so we can conclude\n");
+   printf("|bits             |index/address       |char index    |short index   |int index  |long index |\n");     
+   printf("|---              |---                 |---           |---           |---        |---        |\n");
+   printf("|1010 1110        |5000                |(char*)+ 0    |(short*)+0    |(int*)+0   |(long*)+0  |\n");
+   printf("|1111 0101        |5001                |(char*)+ 1    |              |           |           |\n");
+   printf("|1010 1000        |5002                |(char*)+ 2    |(short*)+1    |           |           |\n");   
+   printf("|0001 1100        |5003                |(char*)+ 3    |              |           |           |\n");
+   printf("|1010 0011        |5004                |(char*)+ 4    |(short*)+2    |(int*)+1   |           |\n");
+   printf("|0101 1001        |5005                |(char*)+ 5    |              |           |           |\n");
+   printf("|1011 1111        |5006                |(char*)+ 6    |(short*)+3    |           |           |\n");
+   printf("|0111 0101        |5007                |(char*)+ 7    |              |           |           |\n");
+   printf("|1110 1000        |5008                |(char*)+ 8    |(short*)+4    |(int*)+2   |(long*)+1  |\n");
+   printf("|0000 0101        |5009                |(char*)+ 9    |              |           |           |\n");
+   printf("|0101 1100        |5010                |(char*)+10    |(short*)+5    |           |           |\n");
+   printf("|1110 1110        |5011                |(char*)+11    |              |           |           |\n");
+   printf("|0001 0011        |5012                |(char*)+12    |(short*)+6    |(int*)+3   |           |\n");
+}
 int main() {
    
    //why_is_this_not_working();
@@ -542,7 +611,9 @@ int main() {
    
    // get_value_of_random_address();
 
-   f_pointer_arithmetic();
+   // f_pointer_arithmetic();
+
+   f_pointer_arithmetic_simple();
 
    // printing_pointer_as_long();
    //  char_info();
