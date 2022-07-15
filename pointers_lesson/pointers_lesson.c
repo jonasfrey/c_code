@@ -250,6 +250,34 @@ void printf_of_a_pointer(){
    printf("\n  (long) &n_num is: %li", (long) &n_num);
 }
 
+void f_read_out_a_byte(){
+   int n_number = 0b11111111000000001111000000001111;
+   //               ^&+0    ^&+1    ^&+2   ^&+3    // the real address with real sum 
+   //               ^1000   1001    1002   1003    // the real address with real sum 
+
+   int * a_n_number = malloc(4);
+
+   *a_n_number = n_number;
+
+   long n_adress_of_a_n_number = &a_n_number;
+
+   long n_adress_of_second_byte = n_adress_of_a_n_number+1;
+   long n_adress_of_third_byte = n_adress_of_a_n_number+2;
+   long n_adress_of_fourth_byte = n_adress_of_a_n_number+3;
+
+   printf("the number %u\n", *a_n_number); // %u for unsigned int !
+
+   printf("adress n_adress_of_second_byte %li\n", (char *) n_adress_of_second_byte); //we have to convert the long to a char pointer
+   printf("adress n_adress_of_third_byte %li\n", (char *) n_adress_of_third_byte); //we have to convert the long to a char pointer
+   printf("adress n_adress_of_fourth_byte %li\n", (char *) n_adress_of_fourth_byte); //we have to convert the long to a char pointer
+
+   printf("value n_adress_of_second_byte %u\n", *(char *) n_adress_of_second_byte); //we have to convert the long to a char pointer
+   printf("value n_adress_of_third_byte %u\n", *(char *) n_adress_of_third_byte); //we have to convert the long to a char pointer
+   printf("value n_adress_of_fourth_byte %u\n", *(char *) n_adress_of_fourth_byte); //we have to convert the long to a char pointer
+
+
+}
+
 void print_simple_char(char s_c){
    printf("\n                scope: %*s",20, __func__);
    printf("\n           char value: %*c",20, s_c);
@@ -615,6 +643,8 @@ int main() {
 
    f_pointer_arithmetic_simple();
 
+   f_read_out_a_byte();
+   
    // printing_pointer_as_long();
    //  char_info();
    //string_info();

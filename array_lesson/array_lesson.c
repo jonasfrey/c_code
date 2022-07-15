@@ -5,6 +5,19 @@
 #include "./../c_helpers/dnd.c"
 
 
+
+#define f_s_typename(x) _Generic((x),                                                 \
+      _Bool: "_Bool",                  unsigned char: "unsigned char",          \
+         char: "char",                     signed char: "signed char",            \
+   short int: "short int",         unsigned short int: "unsigned short int",     \
+         int: "int",                     unsigned int: "unsigned int",           \
+   long int: "long int",           unsigned long int: "unsigned long int",      \
+long long int: "long long int", unsigned long long int: "unsigned long long int", \
+      float: "float",                         double: "double",                 \
+long double: "long double",                   char *: "pointer to char",        \
+      void *: "pointer to void",                int *: "pointer to int",         \
+      default: "other")
+      
 void print_with_newline_prefix(char s_text[]){
 
    //note we can 'concatenate' a string by separating with simple spaces 
@@ -194,12 +207,179 @@ void simple_malloc(){
    // dnds(a_array[3]); // segmentation fault
 }
 
+void f_array_length(){
+   // so in c a array does not know how big it is / how many elements 
+   // it contains 
+   // it is the task of the programmer to keep track of the length 
+   // thats why we often have to pass the length to a function
+   int n_length_a_s_char = 1;
+   char * a_s_char = malloc(n_length_a_s_char);
+
+   a_s_char[0] = 'a'; 
+   printf("string is %s\n", a_s_char);
+
+   // if we would access the memory 
+   // in an area that we didnt 'reserve' with malloc or calloc
+   // it is undefined behaviour !!! 
+   printf("whats this?: %c\n", a_s_char[33]);
+
+   // this may work but it can also cause segmentation fault 
+   for(int n_i = 0; n_i < 100000; n_i++){
+      printf("accessing memory which was not allocated at [-%i]: %i\n", n_i,a_s_char[-n_i]);
+   }
+
+}
+void f_print_array(char * a_s_char,int n_length_a_char){
+   for(int n_i = 0; n_i < n_length_a_char; n_i++){
+      char s_char = a_s_char[n_i];
+      printf("a_s_char[%i](index:%p): %c(as char) %i(as int)\n",n_i, &(a_s_char[n_i]), s_char, s_char);
+   }
+}
+void f_print_every_char(char * a_s_char){
+   int n_i = 0;
+   int s_char;
+#define f_s_typename(x) _Generic((x),                                                 \
+      _Bool: "_Bool",                  unsigned char: "unsigned char",          \
+         char: "char",                     signed char: "signed char",            \
+   short int: "short int",         unsigned short int: "unsigned short int",     \
+         int: "int",                     unsigned int: "unsigned int",           \
+   long int: "long int",           unsigned long int: "unsigned long int",      \
+long long int: "long long int", unsigned long long int: "unsigned long long int", \
+      float: "float",                         double: "double",                 \
+long double: "long double",                   char *: "pointer to char",        \
+      void *: "pointer to void",                int *: "pointer to int",         \
+      default: "other")
+      
+   while(s_char){
+      s_char = a_s_char[n_i];
+      printf("%c", s_char);
+      n_i+=1;
+   }
+   //done
+}
+void f_array_length2(){
+   // so now how do we know that an array is finished?
+   // by having the length stored in a variable
+   int n_capacity_a_s_char = 20;
+   char * a_s_char = malloc(n_capacity_a_s_char);
+
+   a_s_char[0] = '!';
+   a_s_char[1] = 'h';
+   a_s_char[2] = 'a';
+   a_s_char[3] = 'l';
+   a_s_char[4] = 'l';
+   a_s_char[5] = 'o';
+   a_s_char[6] = ' ';
+   a_s_char[7] = 'd';
+   a_s_char[8] = 'u';
+   a_s_char[9] = ' ';
+   a_s_char[10] = 'd';
+   a_s_char[11] = 'a';
+   
+   int n_length_a_s_char = 12;
+
+   f_print_array(a_s_char, n_length_a_s_char);
+
+   // now the printf function 
+   // with the %s (string) is nothing more than 
+   // print every char in the array 
+   // as long as it is not 0 / null 
+   printf("a_s_char printed as s: %s\n", a_s_char);
+   f_print_every_char(a_s_char);
+   printf("\n");
+
+   a_s_char[18] = ':';
+   a_s_char[19] = '>';
+
+   printf("a_s_char printed as s: %s\n", a_s_char);
+   f_print_every_char(a_s_char);
+   printf("\n");
+
+   a_s_char[12] = ' ';
+   a_s_char[13] = ' ';
+   a_s_char[14] = ' ';
+   a_s_char[15] = ' ';
+   a_s_char[16] = ' ';
+   a_s_char[17] = ' ';
+
+   printf("a_s_char printed as s: %s\n", a_s_char);
+   f_print_every_char(a_s_char);
+   printf("\n");
+
+
+}
+
+typedef struct{
+   size_t n_capacity; 
+   size_t n_length; 
+   char * a; 
+} A_s_char;
+void f_a_s_char_init(
+   A_s_char * a_s_char
+){
+   a_s_char->n_capacity = 1; 
+   a_s_char->n_length = 1;
+   a_s_char->a = malloc(a_s_char->n_capacity * sizeof(char)); 
+   // return &a_s_char;
+}
+void f_a_s_char_push(
+   A_s_char * a_s_char, 
+   char s_char
+){
+   if(a_s_char->a == NULL){
+      f_a_s_char_init(a_s_char);
+   }
+   a_s_char->n_capacity = a_s_char->n_length;
+   a_s_char->a = realloc(a_s_char->a, a_s_char->n_length * sizeof(char));
+   a_s_char->a[a_s_char->n_length-1] = s_char;
+   a_s_char->n_length +=1;
+   // if(a_s_char->n_capacity < a_s_char->n_length){
+   // }
+   // a_s_char->
+}
+void f_a_s_char_free(
+   A_s_char * a_s_char
+){
+   free(a_s_char->a);
+   a_s_char->a = NULL;
+   a_s_char->n_capacity = 0;
+   a_s_char->n_length = 0;
+}
+void f_dynamic_array(){
+   // A_s_char * a_s_cahr = f_a_s_char_new();
+   A_s_char a_s_char;
+
+   f_a_s_char_push(&a_s_char,'h');
+   f_a_s_char_push(&a_s_char,'a');
+   f_a_s_char_push(&a_s_char,'l');
+   f_a_s_char_push(&a_s_char,'l');
+   f_a_s_char_push(&a_s_char,'o');
+   f_a_s_char_push(&a_s_char,'!');
+
+   // printf("s is %s", a_s_char.a);
+
+   f_print_every_char(a_s_char.a);
+   printf("\n");
+   printf("type of a_s_char.a is :%s\n", f_s_typename(a_s_char.a));
+
+   printf("a_s_char.a[0] %i\n", a_s_char.a[0]);
+   printf("a_s_char.a[1] %i\n", a_s_char.a[1]);
+   printf("a_s_char.a[2] %i\n", a_s_char.a[2]);
+   printf("a_s_char.a[3] %i\n", a_s_char.a[3]);
+
+}
+
 int main() {
    
    // array_of_strings();
 
-   array_of_strings_dynamic();
+   // array_of_strings_dynamic();
 
+   // f_array_length();
+   
+   // f_array_length2();
+
+   f_dynamic_array();
    return 0;
 }
 

@@ -31,6 +31,10 @@
     "unistd.h": "c",
     "sdl.h": "c",
     "time.h": "c",
-    "functional": "c"
+    "functional": "c",
+    "deque": "c",
+    "string": "c",
+    "vector": "c",
+    "iterator": "c"
   }
 }

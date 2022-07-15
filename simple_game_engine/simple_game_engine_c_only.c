@@ -38,7 +38,6 @@ class O_object_2d{
       O_spatialproperty o_scale;
 };
 
-class O_collision_object; 
 class O_game_object{
    public: 
       std::string s_name;
@@ -46,19 +45,7 @@ class O_game_object{
       // void f_render_function(){
       //    std::cout << "Hello World!";
       // }
-      void (*f_render_function)( 
-         O_game_object * o_game_object
-         );
-      void (*f_collision_function)(
-         O_game_object * o_game_object,
-         std::vector< O_collision_object > *a_o_collision_object, 
-         std::vector< O_game_object > *a_o_game_object
-         );
-};
-class O_collision_object {
-   public: 
-      O_game_object o_game_object; 
-      O_object_2d o_object_2d;
+      void (*f_render_function)(O_game_object * o_game_object);
 };
 
 std::vector< O_game_object > a_o_game_object;
@@ -120,47 +107,35 @@ class O_grid{
          int n_y_original, 
          int n
       ){
-         if(
-            (
-               n_x_original > n_pixel_width
-               ||
-               n_x_original < 0
-               ||
-               n_y_original > n_pixel_height
-               ||
-               n_y_original < 0
-            ) == false
-         ){
-            int n_x = ((int)n_scale_x) * ((int)n_x_original);
-            int n_y = ((int)n_scale_y) * ((int)n_y_original);
-            int n_y_2 = 0; 
-            while(n_y_2 < n_scale_y){
-                  int n_x_2 = 0; 
-                  while(n_x_2 < n_scale_x){
-                     int n_index = f_n_index_by_xy(n_x+n_x_2,n_y+n_y_2);
-                     a_n[n_index] = n;
-                     n_x_2+=1;
-                  }
-                  n_y_2+=1;
+        int n_x = ((int)n_scale_x) * ((int)n_x_original);
+        int n_y = ((int)n_scale_y) * ((int)n_y_original);
+        int n_y_2 = 0; 
+        while(n_y_2 < n_scale_y){
+            int n_x_2 = 0; 
+            while(n_x_2 < n_scale_x){
+               int n_index = f_n_index_by_xy(n_x+n_x_2,n_y+n_y_2);
+               a_n[n_index] = n;
+               n_x_2+=1;
             }
-         }
+            n_y_2+=1;
+        }
 
       }
 
       void f_render(){
          int n_i = 0; 
          while(n_i < n_pixel_height * n_pixel_width){
+            if(n_i % n_pixel_width == 0){
+               // std::cout << "\n";
+               printf("\r\n"); // \r\n is important for curses
+            }
             int n = a_n[n_i]; 
             if(n == 0){
                // std::cout << "-";
-               printf(".");
+               printf("-");
             }else{
                // std::cout << "x";
                printf("x");
-            }
-            if(n_i % n_pixel_width == 0 && n_i >0){
-               // std::cout << "\n";
-               printf("\r\n"); // \r\n is important for curses
             }
             n_i++;
          }
@@ -175,20 +150,11 @@ char s_name[100] = "snake";
 
       }
 };
-
-
 void f_render_function_o_snake(
    O_game_object * o_snake
 ){
    double n_velocity = 1.0;
    char s_key_pressed = (char) n_key_pressed;
-   
-   // std::cout << "\r\n";
-   // std::cout << o_snake->a_o_object_2d[0].o_translation.o_current.n_x;
-   // std::cout << "|";
-   // std::cout << o_snake->a_o_object_2d[0].o_translation.o_current.n_y;
-   // std::cout << "\r\n";
-   // exit(0);
 
    if(s_key_pressed == 'w'){
 
@@ -229,54 +195,6 @@ void f_render_function_o_snake(
          }
          n_i_reversed-=1;
    }
-};
-void f_collision_function_o_snake(
-   O_game_object * o_snake,
-   std::vector< O_collision_object > *a_o_collision_object,
-   std::vector< O_game_object > *a_o_game_object
-   ){
-      // exit(1);
-      // std::cout << "collision happened !";
-      for (auto & o_collision_object : *a_o_collision_object) {
-         if(o_collision_object.o_game_object.s_name == "food"){
-            // std::cout << "collision happened !";
-
-            O_object_2d o_object_2d; 
-            o_snake->a_o_object_2d.push_back(o_object_2d);
-         }
-      }
-};
-void f_render_function_o_food(
-   O_game_object * o_game_object
-   ){
-}
-void f_collision_function_o_food(
-   O_game_object * o_game_object,
-   std::vector< O_collision_object > *a_o_collision_object, 
-   std::vector< O_game_object > *a_o_game_object
-   ){
-      int n_index = 0; 
-      for (auto & o_game_object2 : *a_o_game_object) {
-         if(&o_game_object2 == o_game_object){
-            a_o_game_object->erase(a_o_game_object->begin() + n_index);
-         }
-         n_index+=1;
-
-      }
-
-
-      //o food
-      O_game_object o_food;
-      o_food.s_name = "food";
-      O_object_2d o_object_2d_food; 
-      double n_random_normalized = ((double) rand() / (RAND_MAX)) + 1;
-      o_object_2d_food.o_translation.o_current.n_x = (int) (n_random_normalized * 10);
-      o_object_2d_food.o_translation.o_current.n_y = (int) (n_random_normalized * 10);
-      o_food.a_o_object_2d.push_back(o_object_2d_food);
-      o_food.f_render_function = &f_render_function_o_food;
-      o_food.f_collision_function = &f_collision_function_o_food;
-      a_o_game_object->push_back(o_food);
-
 }
 int main() {
    // start detect keypress
@@ -288,8 +206,8 @@ int main() {
    // O_game_object o_game_object;
    O_grid o_grid;
 
-   o_grid.n_pixel_height = 20; 
-   o_grid.n_pixel_width = 20; 
+   o_grid.n_pixel_height = 40; 
+   o_grid.n_pixel_width = 40; 
 
    // O_snake o_snake;
    O_game_object o_snake;
@@ -300,22 +218,12 @@ int main() {
    o_object_2d.o_translation.o_velocity.n_x = 1;
    o_object_2d.o_translation.o_velocity.n_y = 1;
    o_snake.a_o_object_2d.push_back(o_object_2d);
+
    o_snake.f_render_function = &f_render_function_o_snake;
-   o_snake.f_collision_function = &f_collision_function_o_snake;
    a_o_game_object.push_back(o_snake);
 
-   //o food
-   O_game_object o_food;
-   o_food.s_name = "food";
-   O_object_2d o_object_2d_food; 
-   o_object_2d_food.o_translation.o_current.n_x = 0;
-   o_object_2d_food.o_translation.o_current.n_y = 0;
-   o_food.a_o_object_2d.push_back(o_object_2d_food);
-   o_food.f_render_function = &f_render_function_o_food;
-   o_food.f_collision_function = &f_collision_function_o_food;
-   a_o_game_object.push_back(o_food);
    std::cout << a_o_game_object[0].s_name;
-   std::cout << o_food.s_name;
+   std::cout << o_snake.s_name;
 
    while(1){
       n_key_pressed = getch ();
@@ -329,7 +237,7 @@ int main() {
       }
 
       o_grid.f_clear();
-
+      
       for (auto & o_game_object : a_o_game_object) {
          // std::cout << o_game_object.s_name;
          o_game_object.f_render_function(&o_game_object);
@@ -346,64 +254,6 @@ int main() {
          }
 
       }
-
-      // std::vector<std::vector< O_collision_object >> a_o_collision_object;
-      // std::vector< O_collision_object > a_o_collision_object;
-
-      for (auto & o_game_object : a_o_game_object) {
-         std::vector< O_collision_object > a_o_collision_object;
-         O_collision_object o_collision_object; 
-         o_collision_object.o_game_object = o_game_object; 
-
-         for (auto & o_object_2d : o_game_object.a_o_object_2d) {
-            
-            for (auto & o_game_object2 : a_o_game_object) {
-
-               if(&o_game_object == &o_game_object2){
-                  continue;
-               }
-
-               for (auto & o_object_2d2 : o_game_object2.a_o_object_2d) {
-                  if(
-                     (int) o_object_2d.o_translation.o_current.n_x == (int) o_object_2d2.o_translation.o_current.n_x 
-                     &&
-                     (int) o_object_2d.o_translation.o_current.n_y == (int) o_object_2d2.o_translation.o_current.n_y
-                  ){
-
-                     o_collision_object.o_object_2d = o_object_2d;
-                     a_o_collision_object.push_back(
-                        o_collision_object
-                     );
-                     O_collision_object o_collision_object; 
-                     o_collision_object.o_game_object = o_game_object2;
-                     o_collision_object.o_object_2d = o_object_2d2;
-                     a_o_collision_object.push_back(
-                        o_collision_object
-                     );
-                  }
-               }
-            }
-         }
-         // std::cout << "a_o_collision_object[0].o_object_2d.o_translation.o_current.n_x\r\n"; 
-         // std::cout << a_o_collision_object[0].o_object_2d.o_translation.o_current.n_x;
-         // std::cout << "a_o_collision_object[1].o_object_2d.o_translation.o_current.n_x\r\n"; 
-         // std::cout << a_o_collision_object[1].o_object_2d.o_translation.o_current.n_x;
-         // std::cout << "\r\n";
-
-         // std::cout << "a_o_collision_object.size()\r\n"; 
-         // std::cout << a_o_collision_object.size(); 
-
-         if(a_o_collision_object.size() > 1){
-            o_game_object.f_collision_function(
-               &o_game_object, 
-               &a_o_collision_object,
-               &a_o_game_object 
-            );
-         }
-
-      }
-
-
       o_grid.f_render();
       // usleep(1000);
       std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 1 second
