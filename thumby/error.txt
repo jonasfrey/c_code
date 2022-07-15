@@ -1,0 +1,49 @@
+Arduino: 1.8.19 (Linux), Board: "Raspberry Pi Pico, 2MB (no FS), 125 MHz, Small (-Os) (standard), Disabled, Disabled, Disabled, Disabled, None, Pico SDK"
+
+In file included from /home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/vector:72,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/queue:61,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/hardware/rp2040/2.2.2/cores/rp2040/SerialUART.h:26,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/hardware/rp2040/2.2.2/cores/rp2040/Arduino.h:103,
+                 from sketch/ThumbySimpleExample.ino.cpp:1:
+/home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/bits/vector.tcc: In member function 'void std::vector<_Tp, _Alloc>::_M_realloc_insert(std::vector<_Tp, _Alloc>::iterator, _Args&& ...) [with _Args = {const O_object_2d&}; _Tp = O_object_2d; _Alloc = std::allocator<O_object_2d>]':
+/home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/bits/vector.tcc:426:7: note: parameter passing for argument of type 'std::vector<O_object_2d>::iterator' changed in GCC 7.1
+  426 |       vector<_Tp, _Alloc>::
+      |       ^~~~~~~~~~~~~~~~~~~
+In file included from /home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/vector:67,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/queue:61,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/hardware/rp2040/2.2.2/cores/rp2040/SerialUART.h:26,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/hardware/rp2040/2.2.2/cores/rp2040/Arduino.h:103,
+                 from sketch/ThumbySimpleExample.ino.cpp:1:
+/home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/bits/stl_vector.h: In member function 'void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = O_object_2d; _Alloc = std::allocator<O_object_2d>]':
+/home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/bits/stl_vector.h:1198:21: note: parameter passing for argument of type '__gnu_cxx::__normal_iterator<O_object_2d*, std::vector<O_object_2d> >' changed in GCC 7.1
+ 1198 |    _M_realloc_insert(end(), __x);
+      |    ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+In file included from /home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/vector:72,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/queue:61,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/hardware/rp2040/2.2.2/cores/rp2040/SerialUART.h:26,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/hardware/rp2040/2.2.2/cores/rp2040/Arduino.h:103,
+                 from sketch/ThumbySimpleExample.ino.cpp:1:
+/home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/bits/vector.tcc: In member function 'void std::vector<_Tp, _Alloc>::_M_realloc_insert(std::vector<_Tp, _Alloc>::iterator, _Args&& ...) [with _Args = {const O_collision_object&}; _Tp = O_collision_object; _Alloc = std::allocator<O_collision_object>]':
+/home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/bits/vector.tcc:426:7: note: parameter passing for argument of type 'std::vector<O_collision_object>::iterator' changed in GCC 7.1
+  426 |       vector<_Tp, _Alloc>::
+      |       ^~~~~~~~~~~~~~~~~~~
+In file included from /home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/vector:67,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/queue:61,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/hardware/rp2040/2.2.2/cores/rp2040/SerialUART.h:26,
+                 from /home/ubuntuuser/.arduino15/packages/rp2040/hardware/rp2040/2.2.2/cores/rp2040/Arduino.h:103,
+                 from sketch/ThumbySimpleExample.ino.cpp:1:
+/home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/bits/stl_vector.h: In member function 'void std::vector<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = O_collision_object; _Alloc = std::allocator<O_collision_object>]':
+/home/ubuntuuser/.arduino15/packages/rp2040/tools/pqt-gcc/1.4.0-b-cb31b54/arm-none-eabi/include/c++/10.3.0/bits/stl_vector.h:1198:21: note: parameter passing for argument of type '__gnu_cxx::__normal_iterator<O_collision_object*, std::vector<O_collision_object> >' changed in GCC 7.1
+ 1198 |    _M_realloc_insert(end(), __x);
+      |    ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+Sketch uses 198016 bytes (9%) of program storage space. Maximum is 2093056 bytes.
+Global variables use 14012 bytes (5%) of dynamic memory, leaving 248132 bytes for local variables. Maximum is 262144 bytes.
+Resetting /dev/ttyACM0
+Converting to uf2, output size: 403968, start address: 0x2000
+No drive to deploy.
+An error occurred while uploading the sketch
+
+
+This report would have more information with
+"Show verbose output during compilation"
+option enabled in File -> Preferences.
