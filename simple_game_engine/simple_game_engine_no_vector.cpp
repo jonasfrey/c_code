@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <iostream>
 #include <cstring>
-#include <vector>
 #include <string>
 #include <unistd.h>
 #include <chrono>
@@ -41,14 +40,15 @@ class O_object_2d{
 class O_game_object{
    public: 
       std::string s_name;
-      std::vector< O_object_2d > a_o_object_2d;
+      A_o_object_2d * a_o_object_2d;
+      // std::vector< O_object_2d > a_o_object_2d;
       // void f_render_function(){
       //    std::cout << "Hello World!";
       // }
       void (*f_render_function)(O_game_object * o_game_object);
 };
 
-std::vector< O_game_object > a_o_game_object;
+
 
 class O_grid{
    public:

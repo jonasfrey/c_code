@@ -153,15 +153,16 @@ void test_my_code(){
    array_push(&a_test, 5); 
    array_push(&a_test, 8);
 
-   array_remove(a_test); 
+  //  array_remove(a_test); 
 
 }
+
+
 int main() {
 
-   test_original_code();
+  //  test_original_code();
+  //  test_my_code();
 
-
-   test_my_code();
-
+  f_dynamic_a_s_char();
    return 0;
 }
