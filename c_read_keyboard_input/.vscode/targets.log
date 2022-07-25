@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Jul 26 00:12:46 2022
+# Make data base, printed on Tue Jul 26 00:51:58 2022
 
 # Variables
 
@@ -41,7 +39,7 @@ GDMSESSION = pop
 # environment
 XMODIFIERS = @im=ibus
 # makefile
-CURDIR := /home/jf18j492/code/c_code
+CURDIR := /home/jf18j492/code/c_code/c_read_keyboard_input
 # makefile
 SHELL = /bin/sh
 # environment
@@ -53,15 +51,17 @@ VTE_VERSION = 6003
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:89657
+JOURNAL_STREAM = 8:147939
+# makefile (from 'Makefile', line 2)
+CFLAGS = -Wall -Werror -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -g -O0
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-pop:/etc/xdg:/usr/share/kubuntu-default-settings/kf5-settings
 # environment
 SNAP_INSTANCE_NAME = code
 # environment
 SNAP_ARCH = amd64
-# makefile
-MAKEFILE_LIST := 
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
 # automatic
 @F = $(notdir $@)
 # environment
@@ -77,11 +77,11 @@ XDG_DATA_DIRS = /usr/share/pop:/home/jf18j492/.local/share/flatpak/exports/share
 # environment
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
-MANAGERPID = 5107
+MANAGERPID = 8292
 # environment
 LC_NAME = en_US.UTF-8
 # environment
-VSCODE_CWD = /home/jf18j492/code/c_code
+VSCODE_CWD = /home/jf18j492/code/c_code/c_read_keyboard_input
 # environment
 PAM_KWALLET5_LOGIN = /run/user/1000/kwallet5.socket
 # environment
@@ -97,7 +97,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/aitne:@/tmp/.ICE-unix/5546,unix/aitne:/tmp/.ICE-unix/5546
+SESSION_MANAGER = local/aitne:@/tmp/.ICE-unix/8730,unix/aitne:/tmp/.ICE-unix/8730
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -117,7 +117,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 41d58c8d925748d5aebee442406ec475
+INVOCATION_ID = 128c6badc30a467086e5919cd30aae26
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/102/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -141,13 +141,13 @@ CONDA_EXE = /home/jf18j492/miniconda3/bin/conda
 # environment
 SNAP_INSTANCE_KEY = 
 # environment
-PWD = /home/jf18j492/code/c_code
+PWD = /home/jf18j492/code/c_code/c_read_keyboard_input
 # environment
 QT_QPA_PLATFORMTHEME = qt5ct
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 5360
+SSH_AGENT_PID = 8545
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = pop:GNOME
 # environment
@@ -189,7 +189,7 @@ SNAP_REAL_HOME = /home/jf18j492
 # environment
 CONDA_DEFAULT_ENV = base
 # environment
-PLATFORMIO_PATH = /home/jf18j492/.platformio/penv/bin:/home/jf18j492/.platformio/penv:/home/jf18j492/.platformio/python3/bin:/home/jf18j492/miniconda3/bin:/home/jf18j492/miniconda3/condabin:/home/jf18j492/.cargo/bin:/home/jf18j492/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+PLATFORMIO_PATH = /home/jf18j492/.platformio/python3/bin:/home/jf18j492/miniconda3/bin:/home/jf18j492/miniconda3/condabin:/home/jf18j492/.cargo/bin:/home/jf18j492/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 # environment
 COLORTERM = truecolor
 # default
@@ -213,7 +213,7 @@ SNAP_REVISION = 102
 # environment
 LC_MONETARY = en_US.UTF-8
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := c_read_keyboard_input
 # environment
 XDG_CURRENT_DESKTOP = Unity
 # environment
@@ -227,7 +227,7 @@ CONDA_SHLVL = 1
 # default
 MAKE_COMMAND := make
 # environment
-OLDPWD = /home/jf18j492/code
+OLDPWD = /home/jf18j492/code/c_code
 # default
 .VARIABLES := 
 # automatic
@@ -277,11 +277,11 @@ CONDA_PYTHON_EXE = /home/jf18j492/miniconda3/bin/python
 # environment
 GJS_DEBUG_TOPICS = JS ERROR;JS LOG
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/9d5f9acf_d9a2_4334_b81d_e8c87d5c632e
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/e4d6b153_da77_4011_9e81_0cdcc2135a0e
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.131
+GNOME_TERMINAL_SERVICE = :1.213
 # default
 SUFFIXES := 
 # environment
@@ -290,7 +290,6 @@ SNAP_REEXEC =
 _CE_M = 
 # environment
 CHROME_DESKTOP = code-url-handler.desktop
- 
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # environment
@@ -304,13 +303,16 @@ CYUSB_ROOT = /home/jf18j492/code/cyusb_linux
 # environment
 LANG = C
 # environment
+ 
+make: *** No rule to make target 'all'.  Stop.
+
 TERM = xterm-256color
 # environment
-VSCODE_PID = 15987
+VSCODE_PID = 22218
 # environment
 _CE_CONDA = 
 # variable set hash-table stats:
-# Load=148/1024=14%, Rehash=0, Collisions=19/170=11%
+# Load=149/1024=15%, Rehash=0, Collisions=19/174=11%
 
 # Pattern-specific Variable Values
 
@@ -318,9 +320,9 @@ _CE_CONDA =
 
 # Directories
 
-# . (device 66306, inode 30327236): 101 files, no impossibilities.
+# . (device 66306, inode 30327370): 5 files, no impossibilities.
 
-# 101 files, no impossibilities in 1 directories.
+# 5 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -338,16 +340,16 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-07-26 00:13:20.523073824
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
-# Not a target:
-makefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+c_read_keyboard_input: c_read_keyboard_input.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 5):
+	gcc $(CFLAGS) c_read_keyboard_input.c -o c_read_keyboard_input
 
 # Not a target:
 .DEFAULT:
@@ -355,27 +357,33 @@ makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 8):
+	rm -f c_read_keyboard_input
+
 # Not a target:
-GNUmakefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+c_read_keyboard_input.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
+# Load=7/1024=1%, Rehash=0, Collisions=0/18=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 109 / storage = 1691 B / avg = 15 B
-# current buf: size = 8162 B / used = 1691 B / count = 109 / avg = 15 B
+# strcache buffers: 1 (0) / strings = 12 / storage = 129 B / avg = 10 B
+# current buf: size = 8162 B / used = 129 B / count = 12 / avg = 10 B
 
-# strcache performance: lookups = 112 / hit rate = 2%
+# strcache performance: lookups = 19 / hit rate = 36%
 # hash-table stats:
-# Load=109/8192=1%, Rehash=0, Collisions=2/112=2%
-# Finished Make data base on Tue Jul 26 00:12:46 2022
+# Load=12/8192=0%, Rehash=0, Collisions=1/19=5%
+# Finished Make data base on Tue Jul 26 00:51:58 2022
 
  

@@ -50,7 +50,7 @@ void f_init_a_o_person(
    a_o_person->a = malloc(a_o_person->n_capacity * sizeof(O_person)); 
    // return &a_o_person;
 }
-void f_insertatindex_a_o_person(
+void f_insertafterindex_a_o_person(
    A_o_person * a_o_person, 
    O_person o_person, 
    size_t n_index
@@ -69,21 +69,15 @@ void f_push_a_o_person(
    A_o_person * a_o_person, 
    O_person o_person
 ){
-   f_insertatindex_a_o_person(a_o_person, o_person, a_o_person->n_length);
+   f_insertafterindex_a_o_person(a_o_person, o_person, a_o_person->n_length);
 }
-void f_insertafterindex_a_o_person(
-   A_o_person * a_o_person, 
-   O_person o_person,
-   size_t n_index
-){
-   f_insertatindex_a_o_person(a_o_person, o_person, n_index);
-}
+
 void f_insertbeforeindex_a_o_person(
    A_o_person * a_o_person, 
    O_person o_person,
    size_t n_index
 ){
-   f_insertatindex_a_o_person(a_o_person, o_person, n_index-1);
+   f_insertafterindex_a_o_person(a_o_person, o_person, n_index-1);
 }
 void f_remove_by_index_a_o_person(
    A_o_person * a_o_person, 
