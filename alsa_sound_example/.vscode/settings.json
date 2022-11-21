@@ -32,9 +32,7 @@
     "**/.vscode",
     "**/.vscode/**"
   ],
-  "cSpell.enabled": true,
   "files.associations": {
-    "ratio": "c",
-    "random": "c"
+    "asoundlib.h": "c"
   }
 }

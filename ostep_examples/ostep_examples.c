@@ -5,6 +5,41 @@
 #include <unistd.h>
 #include <inttypes.h>
 #include <math.h>
+char * f_s_format_long(long n){
+   int b = 1;
+   int n_last_decimal_place = n % 10;
+   double n_res = n/10.; 
+   int n_i = 0;
+   int n_decimal_places = floor(log10((double)n));
+
+   char s_num[50];
+   sprintf(&s_num, "%ld", n);
+   n = 0; 
+   char s_out[50];
+   int n2 = 0;
+   while (n < 50){
+      char s = s_num[n]; 
+
+      if((n+n_decimal_places) % 3 == 0){
+         if(s != NULL){
+            s_out[n2] = '\'';
+            n2+=1;
+         }
+      }
+      s_out[n2] = s;
+      n2 +=1;
+
+      if(s == NULL){
+         break;
+      }
+      n+=1;
+   }
+   char *s_out_ptr = s_out;
+
+   return s_out_ptr;
+   // printf("%s", s_num);
+
+}
 void f_fork_example(){
 
    // with fork, a new process can be created
@@ -93,11 +128,20 @@ void f_heavy_cpu_load(){
 }
 void f_print_virutal_adress(){
 
-   printf("pointer/address/index of the current code (function):\n%p, 0d%lu\n", f_print_virutal_adress, (unsigned long) f_print_virutal_adress);
+   printf("pointer/address/index of the current code (function):\n");
+   printf("hex: %20p\n", f_print_virutal_adress);
+   printf("dec: %20s\n", f_s_format_long((long) f_print_virutal_adress));
    void * n_ptr = malloc(100e6);
-   printf("pointer/adress/index of the current heap:\n%p, 0d%lu\n", n_ptr, (unsigned long) n_ptr);
+
+   printf("pointer/address/index of the current heap:\n");
+   printf("hex: %20p\n", n_ptr);
+   printf("dec: %20s\n", f_s_format_long((long) n_ptr) );
    int n_x = 0;
-   printf("pointer/adress/index of the current stack:\n%p, 0d%lu\n", &n_x, (unsigned long) &n_x);
+
+   printf("pointer/address/index of the current stack:\n");
+   printf("hex: %20p\n", &n_x);
+   printf("dec: %20s\n", f_s_format_long((long) &n_x));
+
    //example output
    // pointer/address/index of the current code (function):
    // 0x560ffb743437, 0d  94'626'643'194'935
@@ -111,47 +155,12 @@ void f_print_virutal_adress(){
    // followed by the 'stack'
 
 }
-void f_pretty_print_longint(){
-   long n = 88995544;
-   int b = 1;
-   int n_last_decimal_place = n % 10;
-   double n_res = n/10.; 
-   int n_i = 0;
-   int n_decimal_places = floor(log10((double)n));
-   double n_decimalpointafterfirstnum = (double) n / (pow(10, n_decimal_places));
-   // printf("n_decimalpointafterfirstnum %f\n", n_decimalpointafterfirstnum);
-   int n_firstdecimalplace = 0;
-   // (floor(4.321×10)mod10)
-   while(n_i < (n_decimal_places+1)){
-      n_firstdecimalplace = floor(n_decimalpointafterfirstnum);
-      n_decimalpointafterfirstnum = n_decimalpointafterfirstnum*10-10*floor(n_decimalpointafterfirstnum);
-      
-      if((n_i+n_decimal_places)%3 == 0){
-         printf("'");
-      }
-      printf("%d", n_firstdecimalplace);
-      n_i+=1;
 
-   }
-   // 43214321÷(10^floor(log10(43214321)))
 
-   // while(b){
-   //    n_i+=1;
-   //    if(n_res <= 0.){
-   //       b = 0;
-   //    }
-   //    if((n_i+1)%3 == 0){
-   //       printf("'");
-   //    }
-   //    printf("%d", n_last_decimal_place);
-   //    n_last_decimal_place = ((int) n_res) % 10;
-   //    n_res = n_res/10.;
-   // }
-}
 int main() {
    // f_fork_example();
    // f_many_processes();
    // f_heavy_cpu_load();
    f_print_virutal_adress();
-   f_pretty_print_longint();
+
 }
